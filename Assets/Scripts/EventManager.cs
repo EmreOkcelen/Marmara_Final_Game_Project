@@ -4,17 +4,14 @@ using UnityEngine;
 
 public class EventManager
 {
-    // Event'leri Dictionary ile saklıyoruz
-    public static event Action JumpEvent;
-    public static event Action HelloEvent;
     private static Dictionary<string, Action> eventDictionary = new Dictionary<string, Action>();
 
-    // Event'e abone olma (Subscribe)
+    // Event'e abone olma
     public static void Subscribe(string eventName, Action listener)
     {
-        if (eventDictionary.ContainsKey(eventName))
+        if (eventDictionary.TryGetValue(eventName, out Action action))
         {
-            eventDictionary[eventName] += listener;
+            eventDictionary[eventName] = action + listener;
         }
         else
         {
@@ -22,32 +19,39 @@ public class EventManager
         }
     }
 
-    // Event'ten aboneliği kaldırma (Unsubscribe)
+    // Event'ten aboneliği kaldırma
     public static void Unsubscribe(string eventName, Action listener)
     {
-        if (eventDictionary.ContainsKey(eventName))
+        if (eventDictionary.TryGetValue(eventName, out Action action))
         {
-            eventDictionary[eventName] -= listener;
-
-            if (eventDictionary[eventName] == null)
+            action -= listener;
+            if (action == null)
             {
                 eventDictionary.Remove(eventName);
+            }
+            else
+            {
+                eventDictionary[eventName] = action;
             }
         }
     }
 
-    // Event'i tetikleme (Trigger)
+    // Event'i tetikleme
     public static void Trigger(string eventName)
     {
-        if (eventDictionary.ContainsKey(eventName))
+        if (eventDictionary.TryGetValue(eventName, out Action action))
         {
-            eventDictionary[eventName]?.Invoke();
+            action?.Invoke();
         }
     }
 
-    // Bütün event'leri temizleme (Clear)
+    // Bütün event'leri temizleme
     public static void ClearAllEvents()
     {
+        foreach (var key in eventDictionary.Keys)
+        {
+            eventDictionary[key] = null;  // Bellek sızıntısını engellemek için
+        }
         eventDictionary.Clear();
     }
 }

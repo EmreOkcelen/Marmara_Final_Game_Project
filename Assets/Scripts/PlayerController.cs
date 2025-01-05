@@ -38,13 +38,14 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-
             EventManager.Trigger("MyEvent");
+            EventManager.Unsubscribe("MyEvent",Deneme);
         }
     }
     void Deneme()
     {
         transform.Translate(Vector3.up * 2);
+        Debug.Log("Event Triggered");
     }
 }
 
