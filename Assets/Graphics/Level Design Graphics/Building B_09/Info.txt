@@ -1,0 +1,48 @@
+Hello,
+Thank you for download.
+This is free to use example building model from Building pack B.
+
+You can buy complete pack here:
+https://www.cgtrader.com/3d-models/architectural/architectural-street/building-pack-b
+https://www.artstation.com/marketplace/p/P3rlr/building-pack-b?utm_source=artstation&utm_medium=referral&utm_campaign=homepage&utm_term=marketplace
+
+
+It contain 9 Low poly building models - in avarage 6K tris
+
+9 Textures - 2048x2048 - Each model 1 texture
++ Version with 1 Atlas map for all 9 models
+-----------------------------------------------
+
+.max ( 2019, 2022 )
+.fbx
+.obj
+Unity package
+
+-----------------------------------------------
+Building_B01  -1673 triangles
+
+Building_B02  -9928 triangles 
+
+Building_B03  -10563 triangles 
+
+Building_B04  -5402 triangles   
+
+Building_B05  -2772 triangles   
+
+Building_B06  -5338 triangles 
+
+Building_B07  -2084 triangles   
+
+Building_B08  -4998 triangles   
+
+Building_B09  -8941 triangles   
+------------------------------------------------
+
+Any questions or comments, please, just write.
+Thank you. 
+HK
+
+kimerling.wtf
+
+
+
