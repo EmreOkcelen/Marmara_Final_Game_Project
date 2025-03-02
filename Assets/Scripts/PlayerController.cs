@@ -81,6 +81,10 @@ public class PlayerController : MonoBehaviour
 
         // Hareket: Input değerlerine göre istenen hareket vektörü hesaplanıyor
         float speed = sprintInput ? sprintSpeed : movementSpeed;
+        if (sprintInput)
+        {
+            PlayerStat.Instance.UseStamina(10);
+        }
         Vector3 desiredMove = (transform.forward * moveInput.y + transform.right * moveInput.x) * speed;
         // Yumuşak hız geçişi
         currentVelocity = Vector3.Lerp(currentVelocity, desiredMove, movementSmoothing);
