@@ -659,6 +659,7 @@ GameObject:
   - component: {fileID: 3356793755942518827}
   - component: {fileID: 1920699096469511316}
   - component: {fileID: 7367166282831437575}
+  - component: {fileID: 5904771341405960382}
   m_Layer: 6
   m_Name: VoidPirate
   m_TagString: Untagged
@@ -850,9 +851,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 5
+  sprintSpeed: 10
+  movementSmoothing: 0.2
   xSensitivity: 84.7
   ySensitivity: 109
   cameraTransform: {fileID: 1297247612674377140}
+  cameraLerpSpeed: 20
+  jumpForce: 5
 --- !u!65 &1920699096469511316
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -901,6 +906,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!114 &5904771341405960382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2139120215337496746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90416b0b0a89c4b309d23275dd184927, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 0}
+  Health: 100
+  PreviousHealth: 0
+  staminaBar: {fileID: 0}
+  Stamina: 100
+  PreviousStamina: 0
 --- !u!1 &2216247638639931740
 GameObject:
   m_ObjectHideFlags: 0
