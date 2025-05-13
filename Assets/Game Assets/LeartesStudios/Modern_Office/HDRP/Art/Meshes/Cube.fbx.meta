@@ -7,6 +7,7 @@ ModelImporter:
       1: 100000
     second: //RootNode
   - first:
+<<<<<<< Updated upstream:Assets/Game Assets/LeartesStudios/Modern_Office/HDRP/Art/Meshes/Cube.fbx.meta
       4: 400000
     second: //RootNode
   - first:
@@ -24,6 +25,49 @@ ModelImporter:
   - first:
       43: 4300002
     second: Cube_LOD0
+=======
+      1: 100002
+    second: SM_DecorationF_LOD0
+  - first:
+      1: 100004
+    second: SM_DecorationF_LOD1
+  - first:
+      4: 400000
+    second: //RootNode
+  - first:
+      4: 400002
+    second: SM_DecorationF_LOD0
+  - first:
+      4: 400004
+    second: SM_DecorationF_LOD1
+  - first:
+      21: 2100000
+    second: MI_Decoration
+  - first:
+      23: 2300000
+    second: SM_DecorationF_LOD0
+  - first:
+      23: 2300002
+    second: SM_DecorationF_LOD1
+  - first:
+      33: 3300000
+    second: SM_DecorationF_LOD0
+  - first:
+      33: 3300002
+    second: SM_DecorationF_LOD1
+  - first:
+      43: 4300000
+    second: SM_DecorationF_LOD0
+  - first:
+      43: 4300002
+    second: SM_DecorationF_LOD1
+  - first:
+      43: 4300004
+    second: SM_DecorationF_ConvexHulls
+  - first:
+      205: 20500000
+    second: //RootNode
+>>>>>>> Stashed changes:Assets/Leartes Studios/Modern_Office/HDRP/Art/Meshes/SM_DecorationF.fbx.meta
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -53,7 +97,9 @@ ModelImporter:
     clipAnimations: []
     isReadable: 1
   meshes:
-    lODScreenPercentages: []
+    lODScreenPercentages:
+    - 0.25
+    - 0.01
     globalScale: 1
     meshCompression: 1
     addColliders: 0

@@ -2,11 +2,64 @@ fileFormatVersion: 2
 guid: bd2f032c594c6854391516a74dd55887
 ModelImporter:
   serializedVersion: 22200
+<<<<<<< Updated upstream:Assets/Game Assets/LeartesStudios/CountrysideInterior/Asset files (FBX)/Blanket_Single.fbx.meta
   internalIDToNameTable: []
   externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
+=======
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: //RootNode
+  - first:
+      1: 100002
+    second: SM_BookA_LOD0
+  - first:
+      1: 100004
+    second: SM_BookA_LOD1
+  - first:
+      4: 400000
+    second: //RootNode
+  - first:
+      4: 400002
+    second: SM_BookA_LOD0
+  - first:
+      4: 400004
+    second: SM_BookA_LOD1
+  - first:
+      21: 2100000
+    second: MI_Book
+  - first:
+      23: 2300000
+    second: SM_BookA_LOD0
+  - first:
+      23: 2300002
+    second: SM_BookA_LOD1
+  - first:
+      33: 3300000
+    second: SM_BookA_LOD0
+  - first:
+      33: 3300002
+    second: SM_BookA_LOD1
+  - first:
+      43: 4300000
+    second: SM_BookA_LOD0
+  - first:
+      43: 4300002
+    second: SM_BookA_LOD1
+  - first:
+      43: 4300004
+    second: SM_BookA_ConvexHulls
+  - first:
+      205: 20500000
+    second: //RootNode
+  externalObjects: {}
+  materials:
+    materialImportMode: 1
+    materialName: 1
+>>>>>>> Stashed changes:Assets/Leartes Studios/Modern_Office/HDRP/Art/Meshes/SM_BookA.fbx.meta
     materialSearch: 1
     materialLocation: 1
   animations:
@@ -32,9 +85,11 @@ ModelImporter:
     clipAnimations: []
     isReadable: 0
   meshes:
-    lODScreenPercentages: []
+    lODScreenPercentages:
+    - 0.25
+    - 0.01
     globalScale: 1
-    meshCompression: 0
+    meshCompression: 1
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
@@ -43,25 +98,43 @@ ModelImporter:
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
+<<<<<<< Updated upstream:Assets/Game Assets/LeartesStudios/CountrysideInterior/Asset files (FBX)/Blanket_Single.fbx.meta
     nodeNameCollisionStrategy: 1
     fileIdsGeneration: 2
+=======
+    nodeNameCollisionStrategy: 0
+    fileIdsGeneration: 1
+>>>>>>> Stashed changes:Assets/Leartes Studios/Modern_Office/HDRP/Art/Meshes/SM_BookA.fbx.meta
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
     keepQuads: 0
+<<<<<<< Updated upstream:Assets/Game Assets/LeartesStudios/CountrysideInterior/Asset files (FBX)/Blanket_Single.fbx.meta
     weldVertices: 1
+=======
+    weldVertices: 0
+>>>>>>> Stashed changes:Assets/Leartes Studios/Modern_Office/HDRP/Art/Meshes/SM_BookA.fbx.meta
     bakeAxisConversion: 0
     preserveHierarchy: 0
     skinWeightsMode: 0
     maxBonesPerVertex: 4
     minBoneWeight: 0.001
     optimizeBones: 1
+<<<<<<< Updated upstream:Assets/Game Assets/LeartesStudios/CountrysideInterior/Asset files (FBX)/Blanket_Single.fbx.meta
     meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVMarginMethod: 1
+=======
+    meshOptimizationFlags: 1
+    indexFormat: 2
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 0
+>>>>>>> Stashed changes:Assets/Leartes Studios/Modern_Office/HDRP/Art/Meshes/SM_BookA.fbx.meta
     secondaryUVMinLightmapResolution: 40
     secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
@@ -70,7 +143,11 @@ ModelImporter:
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
+<<<<<<< Updated upstream:Assets/Game Assets/LeartesStudios/CountrysideInterior/Asset files (FBX)/Blanket_Single.fbx.meta
     tangentImportMode: 3
+=======
+    tangentImportMode: 0
+>>>>>>> Stashed changes:Assets/Leartes Studios/Modern_Office/HDRP/Art/Meshes/SM_BookA.fbx.meta
     normalCalculationMode: 4
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
@@ -97,10 +174,17 @@ ModelImporter:
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
+<<<<<<< Updated upstream:Assets/Game Assets/LeartesStudios/CountrysideInterior/Asset files (FBX)/Blanket_Single.fbx.meta
   avatarSetup: 0
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   importBlendShapeDeformPercent: 1
   remapMaterialsIfMaterialImportModeIsNone: 0
+=======
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
+  importBlendShapeDeformPercent: 0
+  remapMaterialsIfMaterialImportModeIsNone: 1
+>>>>>>> Stashed changes:Assets/Leartes Studios/Modern_Office/HDRP/Art/Meshes/SM_BookA.fbx.meta
   additionalBone: 0
   userData: 
   assetBundleName: 

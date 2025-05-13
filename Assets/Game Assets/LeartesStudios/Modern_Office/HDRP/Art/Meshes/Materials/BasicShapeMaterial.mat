@@ -261,7 +261,11 @@ Material:
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 <<<<<<< Updated upstream:Assets/Game Assets/LeartesStudios/Modern_Office/HDRP/Art/Meshes/Materials/BasicShapeMaterial.mat
+<<<<<<< Updated upstream:Assets/Game Assets/LeartesStudios/Modern_Office/HDRP/Art/Meshes/Materials/BasicShapeMaterial.mat
 --- !u!114 &5142061339543621219
+=======
+--- !u!114 &3365756740284502093
+>>>>>>> Stashed changes:Assets/Leartes Studios/Modern_Office/HDRP/Art/Meshes/Materials/BasicShapeMaterial.mat
 =======
 --- !u!114 &3365756740284502093
 >>>>>>> Stashed changes:Assets/Leartes Studios/Modern_Office/HDRP/Art/Meshes/Materials/BasicShapeMaterial.mat
