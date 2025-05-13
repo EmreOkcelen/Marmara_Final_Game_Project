@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7095542798466130646
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 557094092971684012}
+  - component: {fileID: 2280639142364529927}
+  m_Layer: 0
+  m_Name: ToDoListManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &557094092971684012
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7095542798466130646}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1481.1969, y: 822.049, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2280639142364529927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7095542798466130646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be90a7b173b154ae7a6c83c723ba0d06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  taskItemPrefab: {fileID: 8973233690449627270, guid: d3e5816f31b0b4d80bb38ced24e216f2, type: 3}
+  tasksParent: {fileID: 0}
+  initialTasks:
+  - {fileID: 11400000, guid: a90f8a4be981e43fb86d7187e3ea4d2e, type: 2}
+  - {fileID: 11400000, guid: 76bd06dc5a7d74862aa2149983868b5d, type: 2}
+  - {fileID: 11400000, guid: b7c31a88452294a2f92557df82c7ded2, type: 2}
+  - {fileID: 11400000, guid: a90f8a4be981e43fb86d7187e3ea4d2e, type: 2}
+  doneTasks: []
