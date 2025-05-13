@@ -1,0 +1,58 @@
+# Blender MTL File: 'test.blend'
+# Material Count: 4
+
+newmtl Buidling_4
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Bump Texturas\\4K\\Building_4\\Buidings_4_Buidling_4_Normal.jpg
+map_Kd Texturas\\4K\\Building_4\\Buidings_4_Buidling_4_BaseColor.jpg
+map_Ns Texturas\\4K\\Building_4\\Buidings_4_Buidling_4_Roughness.jpg
+refl Texturas\\4K\\Building_4\\Buidings_4_Buidling_4_Metallic.jpg
+
+newmtl Building_1
+Ns 490.886731
+Ka 1.000000 1.000000 1.000000
+Kd 0.081151 0.081151 0.081151
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Bump Texturas\\4K\\Building_1\\Buidings_1_Building_1_Normal.jpg
+map_Kd Texturas\\4K\\Building_1\\Buidings_1_Building_1_BaseColor.jpg
+map_Ns Texturas\\4K\\Building_1\\Buidings_1_Building_1_Roughness.jpg
+refl Texturas\\4K\\Building_1\\Buidings_1_Building_1_Metallic.jpg
+
+newmtl Building_2
+Ns 490.886731
+Ka 1.000000 1.000000 1.000000
+Kd 0.081151 0.081151 0.081151
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Bump Texturas\\4K\\Building_2\\Buidings_2_Building_2_Normal.jpg
+map_Kd Texturas\\4K\\Building_2\\Buidings_2_Building_2_BaseColor.jpg
+map_Ns Texturas\\4K\\Building_2\\Buidings_2_Building_2_Roughness.jpg
+refl Texturas\\4K\\Building_2\\Buidings_2_Building_2_Metallic.jpg
+
+newmtl Building_3
+Ns 490.886731
+Ka 1.000000 1.000000 1.000000
+Kd 0.081151 0.081151 0.081151
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Bump Texturas\\4K\\Building_3\\Buidings_3_Building_3_Normal.jpg
+map_Kd Texturas\\4K\\Building_3\\Buidings_3_Building_3_BaseColor.jpg
+map_Ns Texturas\\4K\\Building_3\\Buidings_3_Building_3_Roughness.jpg
+refl Texturas\\4K\\Building_3\\Buidings_3_Building_3_Metallic.jpg
