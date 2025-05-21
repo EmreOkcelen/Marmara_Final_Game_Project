@@ -1,0 +1,36 @@
+# Blender 3.1.0 MTL File: 'Klopapier.blend'
+# www.blender.org
+
+newmtl Paper_Roll
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.223227 0.177887 0.119535
+Ks 0.154545 0.154545 0.154545
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd  Paper_Roll_Color.png
+map_Bump  -bm 1.000000 NM_Paper_Roll.png
+
+newmtl Paper_Top
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Bump  -bm 1.700000 NormalMap_Texture_Top.png
+
+newmtl Papper_Outside
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.603828 0.603828 0.603828
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Bump  -bm 1.500000 NM_Paper_Outdise.jpg

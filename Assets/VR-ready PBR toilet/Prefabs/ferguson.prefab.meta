@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 53696d19303c1ed43bfc3149d3707063
+timeCreated: 1523634191
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 116576
+  packageName: VR-ready PBR toilet
+  packageVersion: 1.0
+  assetPath: Assets/VR-ready PBR toilet/Prefabs/ferguson.prefab
+  uploadId: 240675
