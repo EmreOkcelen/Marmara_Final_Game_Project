@@ -83,7 +83,7 @@ public class UIManager : MonoBehaviour
 
     public void MainMenuSceneLoader()
     {
-        SceneManager.LoadScene("MainMenu");
+        SceneLoader.LoadSceneWithLoading("BlackScreen");
     }
 
     public void StartGame()
@@ -93,7 +93,7 @@ public class UIManager : MonoBehaviour
         pauseMenu.SetActive(false);
         inGameUI.SetActive(true);
         Time.timeScale = 1f;
-        SceneManager.LoadScene("BedRoom");
+        SceneLoader.LoadSceneWithLoading("BedRoom");
     }
 
     public void OpenSettings()
