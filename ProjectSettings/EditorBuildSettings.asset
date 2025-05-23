@@ -5,9 +5,27 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/ana oyun/MainMenu.unity
+    guid: 159f43438bbaf69448e01a13773349e3
+  - enabled: 1
+    path: Assets/Scenes/ana oyun/Bathroom.unity
+    guid: 4fb5f657ea4bc8b41b9179c2ee76ca62
+  - enabled: 1
+    path: Assets/Scenes/ana oyun/BedRoom.unity
+    guid: 72372aac7a2d2d948aedb46fbef1989e
+  - enabled: 1
+    path: Assets/Scenes/ana oyun/Home.unity
+    guid: 3612afcf283de2f42be79d1aac10ac33
+  - enabled: 1
+    path: Assets/Scenes/ana oyun/Office.unity
+    guid: 0f0a2dd81ba933847b2cd0b0f992768c
+  - enabled: 1
+    path: Assets/Scenes/ana oyun/SubwayStation.unity
+    guid: 4f58f6440f3fcfb48acc5fc5efddf0d4
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 57c43e731ff395642b91b315463e6e19, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: e40d1b67281154803a040a3bbe473df6, type: 3}

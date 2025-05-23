@@ -1066,6 +1066,12 @@ MonoBehaviour:
   settingsMenu: {fileID: 2647681225151554434}
   pauseMenu: {fileID: 903034454540208599}
   inGameUI: {fileID: 1758878221931348286}
+  gameplayScenes:
+  - Bathroom
+  - BedRoom
+  - Home
+  - Office
+  - SubwayStation
 --- !u!114 &4568884921790826896
 MonoBehaviour:
   m_ObjectHideFlags: 0

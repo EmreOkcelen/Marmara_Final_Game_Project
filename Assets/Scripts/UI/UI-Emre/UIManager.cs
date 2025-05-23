@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -9,6 +10,9 @@ public class UIManager : MonoBehaviour
     public GameObject settingsMenu;
     public GameObject pauseMenu;
     public GameObject inGameUI;
+
+    [SerializeField] private string[] gameplayScenes; // inspector’dan ayarlanabilir
+
 
     private void Awake()
     {
@@ -22,8 +26,17 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        ShowMainMenu();
+        string currentScene = SceneManager.GetActiveScene().name;
+        if (currentScene == "MainMenu")
+        {
+            ShowMainMenu();
+        }
+        else
+        {
+            mainMenu.SetActive(false); // Sahne MainMenu deðilse UI'yi kapat
+        }
     }
+
     void Update()
     {
         HandleInput();
@@ -31,6 +44,11 @@ public class UIManager : MonoBehaviour
 
     private void HandleInput()
     {
+        string currentScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+
+        if (!System.Array.Exists(gameplayScenes, scene => scene == currentScene))
+            return;
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (!pauseMenu.activeSelf)
@@ -38,7 +56,21 @@ public class UIManager : MonoBehaviour
             else
                 ResumeGame();
         }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            if (settingsMenu.activeSelf)
+                CloseSettings();
+            else
+                OpenSettings();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            MainMenuSceneLoader();
+        }
     }
+
+
 
     public void ShowMainMenu()
     {
@@ -49,6 +81,11 @@ public class UIManager : MonoBehaviour
         Time.timeScale = 0f;
     }
 
+    public void MainMenuSceneLoader()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
     public void StartGame()
     {
         mainMenu.SetActive(false);
@@ -56,6 +93,7 @@ public class UIManager : MonoBehaviour
         pauseMenu.SetActive(false);
         inGameUI.SetActive(true);
         Time.timeScale = 1f;
+        SceneManager.LoadScene("BedRoom");
     }
 
     public void OpenSettings()
