@@ -11,7 +11,7 @@ public class UIManager : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject inGameUI;
 
-    [SerializeField] private string[] gameplayScenes; // inspector’dan ayarlanabilir
+    [SerializeField] private string[] gameplayScenes;
 
 
     private void Awake()

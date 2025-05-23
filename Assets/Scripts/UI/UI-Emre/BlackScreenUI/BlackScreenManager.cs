@@ -21,13 +21,21 @@ public class BlackScreenManager : MonoBehaviour
 
     private void Start()
     {
-        selectedVersion = BlackScreenState.Instance.GetCurrentDialogVersion();
-        nextSceneName = BlackScreenState.Instance.GetCurrentScene();
+        if (BlackScreenState.Instance != null)
+        {
+            selectedVersion = BlackScreenState.Instance.GetCurrentDialogVersion();
+            nextSceneName = BlackScreenState.Instance.GetCurrentScene();
+        }
+        else
+        {
+            Debug.LogWarning("BlackScreenState bulunamadý, default ayarlar kullanýlýyor.");
+        }
 
         LoadDialogFromJson(selectedVersion);
         if (dialogLines != null && dialogLines.Length > 0)
             StartCoroutine(TypeLine(dialogLines[currentLine]));
     }
+
 
 
     void LoadDialogFromJson(DialogVersion version)

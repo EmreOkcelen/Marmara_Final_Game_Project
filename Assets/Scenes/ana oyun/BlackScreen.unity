@@ -555,6 +555,55 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1823471541}
   m_CullTransparentMesh: 1
+--- !u!1 &1956659128
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1956659130}
+  - component: {fileID: 1956659129}
+  m_Layer: 0
+  m_Name: BlackScreenState
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1956659129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1956659128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ab83db4f88d51142b552ad56c9eadbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogVersions: 000000000100000000000000
+  sceneNames:
+  - BedRoom
+  - Home
+  - Bathroom
+--- !u!4 &1956659130
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1956659128}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.993284, y: 1.4117345, z: 6.1263247}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2070169020
 GameObject:
   m_ObjectHideFlags: 0
@@ -905,7 +954,6 @@ GameObject:
   - component: {fileID: 965863660132621988}
   - component: {fileID: 2816347827961617884}
   - component: {fileID: 8199177012962951186}
-  - component: {fileID: 8199177012962951187}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -1044,25 +1092,6 @@ MonoBehaviour:
   typingSpeed: 0.1
   selectedVersion: 0
   nextSceneName: BedRoom
---- !u!114 &8199177012962951187
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4005125640310396062}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ab83db4f88d51142b552ad56c9eadbf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentDialogIndex: 0
-  currentSceneIndex: 0
-  sceneNames:
-  - BedRoom
-  - Home
-  - BathRoom
-  dialogVersions: 000000000100000000000000
 --- !u!1 &9115568379735389517
 GameObject:
   m_ObjectHideFlags: 0
@@ -1088,3 +1117,4 @@ SceneRoots:
   - {fileID: 7537393534942884511}
   - {fileID: 1501135728}
   - {fileID: 315037960}
+  - {fileID: 1956659130}

@@ -1,17 +1,14 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class BlackScreenState : MonoBehaviour
 {
-    public static BlackScreenState Instance;
+    public static BlackScreenState Instance { get; private set; }
 
-    public int currentDialogIndex = 0;
-    public int currentSceneIndex = 0;
+    private int currentIndex = 0;
 
-    public string[] sceneNames = { "BedRoom", "Home", "BathRoom" };
-    public BlackScreenManager.DialogVersion[] dialogVersions = {
-        BlackScreenManager.DialogVersion.LinesV1,
-        BlackScreenManager.DialogVersion.LinesV2
-    };
+    public List<BlackScreenManager.DialogVersion> dialogVersions = new List<BlackScreenManager.DialogVersion>();
+    public List<string> sceneNames = new List<string>();
 
     private void Awake()
     {
@@ -20,29 +17,29 @@ public class BlackScreenState : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(this.gameObject);
         }
-        else
+        else if (Instance != this)
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
-    }
-
-    public string GetCurrentScene()
-    {
-        if (currentSceneIndex >= 0 && currentSceneIndex < sceneNames.Length)
-            return sceneNames[currentSceneIndex];
-        return null;
     }
 
     public BlackScreenManager.DialogVersion GetCurrentDialogVersion()
     {
-        if (currentDialogIndex >= 0 && currentDialogIndex < dialogVersions.Length)
-            return dialogVersions[currentDialogIndex];
-        return BlackScreenManager.DialogVersion.LinesV1;
+        return (currentIndex < dialogVersions.Count) ? dialogVersions[currentIndex] : BlackScreenManager.DialogVersion.LinesV1;
+    }
+
+    public string GetCurrentScene()
+    {
+        return (currentIndex < sceneNames.Count) ? sceneNames[currentIndex] : "";
     }
 
     public void AdvanceToNext()
     {
-        currentDialogIndex++;
-        currentSceneIndex++;
+        currentIndex++;
+    }
+
+    public void ResetState()
+    {
+        currentIndex = 0;
     }
 }
