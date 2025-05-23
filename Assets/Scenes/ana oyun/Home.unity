@@ -57294,6 +57294,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ToDoListManager
       objectReference: {fileID: 0}
+    - target: {fileID: 7095542798466130646, guid: bae5561a45c3747c3aa57bb0a6b76547, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

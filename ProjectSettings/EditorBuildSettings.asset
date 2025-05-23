@@ -26,6 +26,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ana oyun/SubwayStation.unity
     guid: 4f58f6440f3fcfb48acc5fc5efddf0d4
+  - enabled: 1
+    path: Assets/Scenes/ana oyun/Loading.unity
+    guid: 0634fbf91ae535b4ead50c656d1ce38d
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 57c43e731ff395642b91b315463e6e19, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: e40d1b67281154803a040a3bbe473df6, type: 3}
