@@ -1,57 +1,80 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class EventManager
+public class EventManager : MonoBehaviour
 {
-    private static Dictionary<string, Action> eventDictionary = new Dictionary<string, Action>();
-
-    // Event'e abone olma
-    public static void Subscribe(string eventName, Action listener)
+    // Inspector'da her olay için birer satır gözükecek
+    [System.Serializable]
+    public class EventEntry
     {
-        if (eventDictionary.TryGetValue(eventName, out Action action))
+        public string eventName;
+        public UnityEvent response;
+    }
+
+    [SerializeField]
+    private List<EventEntry> events = new List<EventEntry>();
+
+    // Hızlı lookup için runtime-dictionary
+    private Dictionary<string, UnityEvent> eventDictionary;
+
+    // Singleton instance (isteğe bağlı)
+    public static EventManager Instance { get; private set; }
+
+    private void Awake()
+    {
+        // Singleton ataması
+        if (Instance == null)
         {
-            eventDictionary[eventName] = action + listener;
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
-            eventDictionary[eventName] = listener;
+            Destroy(gameObject);
+            return;
         }
-    }
 
-    // Event'ten aboneliği kaldırma
-    public static void Unsubscribe(string eventName, Action listener)
-    {
-        if (eventDictionary.TryGetValue(eventName, out Action action))
+        // Dictionary’i oluştur ve inspector’daki listeyi ekle
+        eventDictionary = new Dictionary<string, UnityEvent>();
+        foreach (var entry in events)
         {
-            action -= listener;
-            if (action == null)
+            if (!string.IsNullOrEmpty(entry.eventName))
             {
-                eventDictionary.Remove(eventName);
-            }
-            else
-            {
-                eventDictionary[eventName] = action;
+                eventDictionary[entry.eventName] = entry.response;
             }
         }
     }
 
-    // Event'i tetikleme
+    // Event’e abone olma
+    public static void Subscribe(string eventName, UnityAction listener)
+    {
+        if (Instance.eventDictionary.TryGetValue(eventName, out UnityEvent thisEvent))
+        {
+            thisEvent.AddListener(listener);
+        }
+        else
+        {
+            Debug.LogWarning($"EventManager: '{eventName}' adında bir event yok.");
+        }
+    }
+
+    // Event’ten aboneliği kaldırma
+    public static void Unsubscribe(string eventName, UnityAction listener)
+    {
+        if (Instance.eventDictionary.TryGetValue(eventName, out UnityEvent thisEvent))
+        {
+            thisEvent.RemoveListener(listener);
+        }
+    }
+
+    // Event’i tetikleme
     public static void Trigger(string eventName)
     {
-        if (eventDictionary.TryGetValue(eventName, out Action action))
+        if (Instance.eventDictionary.TryGetValue(eventName, out UnityEvent thisEvent))
         {
-            action?.Invoke();
+            thisEvent.Invoke();
         }
     }
-
-    // Bütün event'leri temizleme
-    public static void ClearAllEvents()
-    {
-        foreach (var key in eventDictionary.Keys)
-        {
-            eventDictionary[key] = null;  // Bellek sızıntısını engellemek için
-        }
-        eventDictionary.Clear();
-    }
+    
 }

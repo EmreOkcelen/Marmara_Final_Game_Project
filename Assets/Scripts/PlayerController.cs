@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 moveInput;
     private Vector2 lookInput;
     private bool sprintInput;
+    private Rigidbody rb;
     private bool isUIOpen = false; // UI açık mı kontrol değişkeni
 
     [Header("Movement Settings")]
@@ -29,6 +30,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        rb = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         playerInputs = new PlayerInputs();
@@ -57,7 +59,9 @@ public class PlayerController : MonoBehaviour
         playerInputs.Player.Enable();
 
         // UI açılıp kapanırken hareketi engelleyen eventleri dinliyoruz
-        EventManager.Subscribe("LockPlayerMovement", () => isUIOpen = true);
+        EventManager.Subscribe("LockPlayerMovement", () => isUIOpen = true );
+        EventManager.Subscribe("LockPlayerMovement", LockPlayerMovement);
+        EventManager.Subscribe("UnlockPlayerMovement", UnlockPlayerMovement);
         EventManager.Subscribe("UnlockPlayerMovement", () => isUIOpen = false);
     }
 
@@ -67,6 +71,8 @@ public class PlayerController : MonoBehaviour
 
         EventManager.Unsubscribe("LockPlayerMovement", () => isUIOpen = true);
         EventManager.Unsubscribe("UnlockPlayerMovement", () => isUIOpen = false);
+        EventManager.Unsubscribe("LockPlayerMovement", LockPlayerMovement);
+        EventManager.Unsubscribe("UnlockPlayerMovement", UnlockPlayerMovement);
     }
 
     private void Update()
@@ -99,7 +105,19 @@ public class PlayerController : MonoBehaviour
         currentVelocity = Vector3.Lerp(currentVelocity, desiredMove, movementSmoothing);
         // Dünya uzayında konum güncellemesi
         transform.Translate(currentVelocity * Time.deltaTime, Space.World);
+        //rb.linearVelocity = new Vector3(currentVelocity.x, rb.linearVelocity.y, currentVelocity.z); // Y eksenindeki hızı koru
     }
+
+    void LockPlayerMovement()
+    {
+        //rb.linearVelocity = Vector3.zero; // Hareketi sıfırla   
+        rb.isKinematic = true; // Rigidbody'yi kinematik yap
+    }
+    void UnlockPlayerMovement()
+    {
+        rb.isKinematic = false; // Rigidbody'yi kinematikten çıkar
+    }   
+
 
     // Basit yer temas kontrolü: Eğer nesne "Ground" tag'ine sahip bir obje ile çarpışırsa isGrounded true olur
     private void OnCollisionEnter(Collision collision)
@@ -107,6 +125,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
             isGrounded = true;
     }
+
 }
 
 

@@ -1,34 +1,112 @@
 using UnityEngine;
+using TMPro;
+using System.Linq;
 
-public class InteractableObject : MonoBehaviour
+public class InteractableUIController : MonoBehaviour
 {
-    public string interactionText; // Objeye özel metin
-    private bool isPlayerInRange = false; // Oyuncu objeye yaklaþtý mý?
+    [Header("Settings")]
+    [TextArea] public string interactionText;
+    public Vector3 boxSize = Vector3.one * 5f;
+    public Vector3 promptOffset = Vector3.up * 2f;
+    public GameObject promptObject;
 
-    private void OnTriggerEnter(Collider other)
+    private TextMeshPro prompt3DText;
+    private bool isInRange;
+    private bool isPanelOpen;
+
+    void Start()
     {
-        if (other.CompareTag("Player"))
+        if (promptObject != null)
         {
-            isPlayerInRange = true;  // Oyuncu objeye girdi
-            EventManager.Trigger($"ShowInteraction_{gameObject.name}");
+            prompt3DText = promptObject.GetComponent<TextMeshPro>();
+            promptObject.SetActive(false);
+        }// Ã–rnek: hareketi kilitle
+
+    }
+
+    void Update()
+    {
+        UpdateRange();
+        if (isInRange)
+            CheckForInteraction();
+
+    }
+
+    void LateUpdate()
+    {
+        if (isInRange && promptObject.activeSelf)
+            UpdatePromptTransform();
+    }
+
+    // --- Range Detection & Prompt ---
+    void UpdateRange()
+    {
+        bool playerNear = Physics.OverlapBox(transform.position, boxSize * 0.5f, transform.rotation)
+                               .Any(c => c.CompareTag("Player"));
+
+        if (playerNear && !isInRange)
+            ShowPrompt();
+        else if (!playerNear && isInRange)
+            HidePrompt();
+
+        isInRange = playerNear;
+    }
+
+    void ShowPrompt()
+    {
+        if (promptObject == null) return;
+        prompt3DText.text = $"E) Interact with {gameObject.name}";
+        promptObject.SetActive(true);
+    }
+
+    void HidePrompt()
+    {
+        if (promptObject != null)
+            promptObject.SetActive(false);
+
+        if (isPanelOpen)
+            ClosePanel();
+    }
+
+    void UpdatePromptTransform()
+    {
+        Vector3 worldPos = transform.position + promptOffset;
+        promptObject.transform.position = worldPos;
+        promptObject.transform.rotation = Quaternion.LookRotation(worldPos - Camera.main.transform.position);
+    }
+
+    // --- Input Handling ---
+    void CheckForInteraction()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (isPanelOpen) ClosePanel();
+            else OpenPanel();
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    // --- Panel Control ---
+    void OpenPanel()
     {
-        if (other.CompareTag("Player"))
-        {
-            isPlayerInRange = false; // Oyuncu objeden çýktý
-            EventManager.Trigger("HideInteraction");
-        }
+        isPanelOpen = true;
+        promptObject.SetActive(false);
+        UIManager.instance.ShowInteractionPanel(interactionText);
+        EventManager.Trigger("LockPlayerMovement");
     }
 
-    private void Update()
+    void ClosePanel()
     {
-        if (isPlayerInRange && Input.GetKeyDown(KeyCode.E))
-        {
-            EventManager.Trigger("ToggleUI");
-            EventManager.Trigger($"ShowText_{gameObject.name}");
-        }
+        isPanelOpen = false;
+        UIManager.instance.HideInteractionPanel();
+        EventManager.Trigger("UnlockPlayerMovement");
+    }
+
+    // --- Editor Gizmo ---
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.matrix = Matrix4x4.TRS(transform.position, transform.rotation, transform.lossyScale);
+        Gizmos.DrawWireCube(Vector3.zero, boxSize);
+        Gizmos.matrix = Matrix4x4.identity;
     }
 }
