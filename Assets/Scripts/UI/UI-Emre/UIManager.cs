@@ -33,7 +33,7 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            mainMenu.SetActive(false); // Sahne MainMenu de�ilse UI'yi kapat
+            mainMenu.SetActive(false); // Sahne MainMenu de�ilse UI'yi kapat
         }
     }
 
@@ -124,5 +124,25 @@ public class UIManager : MonoBehaviour
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
+    }
+    public void ShowInteractionPanel(string interactionText)
+    {
+        if (inGameUI == null)
+        {
+            Debug.LogError("In-Game UI GameObject is not assigned in the UIManager.");
+            return;
+        }
+
+        // Burada etkileşim panelini açmak için gerekli kodları ekleyebilirsiniz
+        // Örneğin, bir metin bileşeni varsa, metni ayarlayabilirsiniz
+        // interactionTextComponent.text = interactionText;
+
+        inGameUI.SetActive(true);
+    }
+
+    public void HideInteractionPanel()
+    {
+        inGameUI.SetActive(false);
+        // Burada etkileşim panelini kapatmak için gerekli kodları ekleyebilirsiniz
     }
 }
