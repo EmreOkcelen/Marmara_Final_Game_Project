@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
     public GameObject settingsMenu;
     public GameObject pauseMenu;
     public GameObject inGameUI;
+    public GameObject talkingWithMyselfPanel;
 
     [SerializeField] private string[] gameplayScenes;
 
@@ -23,6 +24,8 @@ public class UIManager : MonoBehaviour
             return;
         }
         Instance = this;
+        inGameUI.SetActive(false); // In-Game UI başlangıçta kapalı
+        talkingWithMyselfPanel.SetActive(false); // Talking with myself panel başlangıçta kapalı
     }
 
     private void Start()
