@@ -12,12 +12,12 @@ public class BlackScreenManager : MonoBehaviour
     private int currentLine = 0;
     private bool isTyping = false;
 
-    // Hangi versiyon kullanýlacak, inspector veya baþka script'ten atanabilir
+    // Hangi versiyon kullanï¿½lacak, inspector veya baï¿½ka script'ten atanabilir
     public enum DialogVersion { LinesV1, LinesV2 }
     [SerializeField] private DialogVersion selectedVersion = DialogVersion.LinesV1;
 
-    [Header("Diyalog bittiðinde geçilecek sahne")]
-    [SerializeField] private string nextSceneName;  // Inspector'dan sahne adý girilecek
+    [Header("Diyalog bittiï¿½inde geï¿½ilecek sahne")]
+    [SerializeField] private string nextSceneName;  // Inspector'dan sahne adï¿½ girilecek
 
     private void Start()
     {
@@ -28,7 +28,7 @@ public class BlackScreenManager : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("BlackScreenState bulunamadý, default ayarlar kullanýlýyor.");
+            Debug.LogWarning("BlackScreenState bulunamadï¿½, default ayarlar kullanï¿½lï¿½yor.");
         }
 
         LoadDialogFromJson(selectedVersion);
@@ -53,15 +53,15 @@ public class BlackScreenManager : MonoBehaviour
                     dialogLines = data.LinesV2?.ToArray();
                     break;
                 default:
-                    dialogLines = new string[] { "Diyalog versiyonu seçilmedi." };
+                    dialogLines = new string[] { "Diyalog versiyonu seï¿½ilmedi." };
                     break;
             }
-            Debug.Log("Dialog satýrlarý yüklendi: " + dialogLines.Length);
+            Debug.Log("Dialog satï¿½rlarï¿½ yï¿½klendi: " + dialogLines.Length);
         }
         else
         {
-            Debug.LogError("dialog.json bulunamadý!");
-            dialogLines = new string[] { "Diyalog dosyasý yüklenemedi." };
+            Debug.LogError("dialog.json bulunamadï¿½!");
+            dialogLines = new string[] { "Diyalog dosyasï¿½ yï¿½klenemedi." };
         }
     }
 
@@ -79,7 +79,7 @@ public class BlackScreenManager : MonoBehaviour
                 }
                 else
                 {
-                    // Diyalog bittiðinde:
+                    // Diyalog bittiï¿½inde:
                     if (!string.IsNullOrEmpty(nextSceneName))
                     {
                         BlackScreenState.Instance.AdvanceToNext();
@@ -89,9 +89,9 @@ public class BlackScreenManager : MonoBehaviour
             }
             else
             {
-                // Yazý yazýlýrken space basýlýrsa yazýnýn tamamý anýnda gözüksün
+                // Yazï¿½ yazï¿½lï¿½rken space basï¿½lï¿½rsa yazï¿½nï¿½n tamamï¿½ anï¿½nda gï¿½zï¿½ksï¿½n
                 StopAllCoroutines();
-                // Burada yazýyý alttaki gibi ekliyoruz, yeni satýr alt alta
+                // Burada yazï¿½yï¿½ alttaki gibi ekliyoruz, yeni satï¿½r alt alta
                 dialogText.text += dialogLines[currentLine] + "\n";
                 isTyping = false;
             }
@@ -103,13 +103,13 @@ public class BlackScreenManager : MonoBehaviour
     {
         isTyping = true;
 
-        // Burada silme yapmýyoruz, sadece yeni satýrý alt alta ekleyeceðiz
+        // Burada silme yapmï¿½yoruz, sadece yeni satï¿½rï¿½ alt alta ekleyeceï¿½iz
         string currentText = dialogText.text;
 
-        // Önce boþ yazalým, sonra harf harf ekleyelim, ekrandaki metnin tamamýný kaybetmemek için:
+        // ï¿½nce boï¿½ yazalï¿½m, sonra harf harf ekleyelim, ekrandaki metnin tamamï¿½nï¿½ kaybetmemek iï¿½in:
         // Yani dialogText.text = currentText + (harf harf eklenecek);
 
-        dialogText.text = currentText;  // var olaný koru
+        dialogText.text = currentText;  // var olanï¿½ koru
 
         foreach (char c in line)
         {
@@ -120,7 +120,7 @@ public class BlackScreenManager : MonoBehaviour
         }
 
 
-        dialogText.text += "\n";  // her satýrdan sonra alt satýra geç
+        dialogText.text += "\n";  // her satï¿½rdan sonra alt satï¿½ra geï¿½
 
         isTyping = false;
     }
