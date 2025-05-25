@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -138,6 +139,7 @@ public class UIManager : MonoBehaviour
         // interactionTextComponent.text = interactionText;
 
         inGameUI.SetActive(true);
+        inGameUI.GetComponentInChildren<TMP_Text>().text = interactionText;
     }
 
     public void HideInteractionPanel()
