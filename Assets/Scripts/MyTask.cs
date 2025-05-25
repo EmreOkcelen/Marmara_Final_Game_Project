@@ -26,6 +26,8 @@ public abstract class MyTask : MonoBehaviour
             taskText.text = description;
         else
             Debug.LogWarning($"[{name}] taskText atanmamış.");
+        
+        onCompleted.AddListener(() => { Debug.Log($"[{name}] görev tamamlandı!"); });
     }
 
     protected virtual void Update()

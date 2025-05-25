@@ -2,9 +2,24 @@ using UnityEngine;
 
 public class ChairTask : MyTask
 {
-	public override bool CheckCompletion()
-	{
-		// TODO: Implement your completion check logic here
-		return false; // Default return value, replace with actual implementation
-	}
+    private bool isTouched = false;
+    public override bool CheckCompletion()
+    {
+        if (isTouched)
+        {
+            Debug.Log("Chair task completed.");
+            return true; // Görev tamamlandı
+        }
+        return false; // Görev tamamlanmadı
+        
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            isTouched = true;
+            Debug.Log("Player touched the chair.");
+        }
+    }
 }
