@@ -13,14 +13,15 @@ public abstract class MyTask : MonoBehaviour
     [Header("Olaylar")]
     public UnityEvent onCompleted;
 
-    /// <summary>
-    /// Görevin tamamlanma durumu.
-    /// </summary>
     public bool IsCompleted;
-
+    public enum TaskType
+    {
+        Home,
+        Subway,
+        Office,
+    }
     protected virtual void Start()
     {
-        // Görev açıklamasını UI'a bas
         if (taskText != null)
             taskText.text = description;
         else
@@ -29,29 +30,21 @@ public abstract class MyTask : MonoBehaviour
 
     protected virtual void Update()
     {
-        // Eğer henüz tamamlanmadıysa, her frame kontrol et
         if (!IsCompleted && CheckCompletion())
             Complete();
     }
 
-    /// <summary>
-    /// Görevin tamamlandığını tespit eden metot. Her alt sınıf burada kendi koşulunu yazar.
-    /// </summary>
-    protected abstract bool CheckCompletion();
 
-    /// <summary>
-    /// Tamamlama işlemleri: durumu işaretle, event tetikle, gerekirse UI güncelle.
-    /// </summary>
-    protected virtual void Complete()
+    public abstract bool CheckCompletion();
+
+
+    public virtual void Complete()
     {
         IsCompleted = true;
         onCompleted?.Invoke();
         Debug.Log($"Görev tamamlandı: {name}");
     }
 
-    /// <summary>
-    /// Görevi sıfırlar (örneğin yeniden başlatma gerektiğinde).
-    /// </summary>
     public virtual void ResetTask()
     {
         IsCompleted = false;
@@ -60,7 +53,6 @@ public abstract class MyTask : MonoBehaviour
     }
     public void Initiate()
     {
-        // Başlangıçta görevi başlat
         ResetTask();
         Start();
     }
