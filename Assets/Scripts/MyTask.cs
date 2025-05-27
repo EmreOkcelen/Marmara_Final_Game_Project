@@ -14,13 +14,14 @@ public abstract class MyTask : MonoBehaviour
     public UnityEvent onCompleted;
 
     public bool IsCompleted;
+    public bool isInteracted;
     public enum TaskType
     {
         Home,
         Subway,
         Office,
     }
-    protected virtual void Start()
+    public virtual void Start()
     {
         if (taskText != null)
             taskText.text = description;
@@ -30,10 +31,11 @@ public abstract class MyTask : MonoBehaviour
         onCompleted.AddListener(() => { Debug.Log($"[{name}] görev tamamlandı!"); });
     }
 
-    protected virtual void Update()
+    public virtual void Update()
     {
         if (!IsCompleted && CheckCompletion())
             Complete();
+
     }
 
 

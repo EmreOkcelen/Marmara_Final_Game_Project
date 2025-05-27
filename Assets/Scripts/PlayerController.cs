@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -56,20 +57,26 @@ public class PlayerController : MonoBehaviour
             }
         };
         p.Enable();
-        EventManager.Subscribe("LockPlayerMovement",   () => isUIOpen = true);
-        EventManager.Subscribe("UnlockPlayerMovement", () => isUIOpen = false);
+        // UI açıldığında hareketi kilitle
+        // UI kapandığında hareketi aç
+        EventManager.Subscribe("LockPlayerMovement", () => rb.isKinematic = true);
+        EventManager.Subscribe("UnlockPlayerMovement", () => rb.isKinematic = false);
+        EventManager.Subscribe("UIOpen", () => EventManager.Trigger("LockPlayerMovement"));
+        EventManager.Subscribe("UIClose", () => EventManager.Trigger("UnlockPlayerMovement"));
     }
 
     private void OnDisable()
     {
         playerInputs.Player.Disable();
-        EventManager.Unsubscribe("LockPlayerMovement",   () => isUIOpen = true);
-        EventManager.Unsubscribe("UnlockPlayerMovement", () => isUIOpen = false);
+        EventManager.Unsubscribe("LockPlayerMovement", () => rb.isKinematic = true);
+        EventManager.Unsubscribe("UnlockPlayerMovement", () => rb.isKinematic = false);
+        EventManager.Unsubscribe("UIOpen", () => EventManager.Trigger("LockPlayerMovement"));
+        EventManager.Unsubscribe("UIClose", () => EventManager.Trigger("UnlockPlayerMovement"));
     }
 
     private void Update()
     {
-        if (isUIOpen) return;
+
         // Yatay dönüş
         transform.Rotate(Vector3.up * lookInput.x * Time.deltaTime * ySensitivity);
         // Dikey kamera açısı
@@ -87,7 +94,6 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isUIOpen) return;
 
         float speed = sprintInput ? sprintSpeed : walkSpeed;
         if (sprintInput)

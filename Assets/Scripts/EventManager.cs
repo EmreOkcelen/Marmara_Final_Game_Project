@@ -4,26 +4,11 @@ using UnityEngine.Events;
 
 public class EventManager : MonoBehaviour
 {
-    // Inspector'da her olay için birer satır gözükecek
-    [System.Serializable]
-    public class EventEntry
-    {
-        public string eventName;
-        public UnityEvent response;
-    }
-
-    [SerializeField]
-    private List<EventEntry> events = new List<EventEntry>();
-
-    // Hızlı lookup için runtime-dictionary
-    private Dictionary<string, UnityEvent> eventDictionary;
-
-    // Singleton instance (isteğe bağlı)
+    private Dictionary<string, UnityEvent> eventDictionary = new Dictionary<string, UnityEvent>();
     public static EventManager Instance { get; private set; }
 
     private void Awake()
     {
-        // Singleton ataması
         if (Instance == null)
         {
             Instance = this;
@@ -32,49 +17,28 @@ public class EventManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
-            return;
-        }
-
-        // Dictionary’i oluştur ve inspector’daki listeyi ekle
-        eventDictionary = new Dictionary<string, UnityEvent>();
-        foreach (var entry in events)
-        {
-            if (!string.IsNullOrEmpty(entry.eventName))
-            {
-                eventDictionary[entry.eventName] = entry.response;
-            }
         }
     }
 
-    // Event’e abone olma
     public static void Subscribe(string eventName, UnityAction listener)
     {
-        if (Instance.eventDictionary.TryGetValue(eventName, out UnityEvent thisEvent))
-        {
-            thisEvent.AddListener(listener);
-        }
-        else
-        {
-            Debug.LogWarning($"EventManager: '{eventName}' adında bir event yok.");
-        }
+        if (Instance == null) return;
+        
+        if (!Instance.eventDictionary.ContainsKey(eventName))
+            Instance.eventDictionary[eventName] = new UnityEvent();
+        
+        Instance.eventDictionary[eventName].AddListener(listener);
     }
 
-    // Event’ten aboneliği kaldırma
     public static void Unsubscribe(string eventName, UnityAction listener)
     {
-        if (Instance.eventDictionary.TryGetValue(eventName, out UnityEvent thisEvent))
-        {
-            thisEvent.RemoveListener(listener);
-        }
+        if (Instance?.eventDictionary.ContainsKey(eventName) == true)
+            Instance.eventDictionary[eventName].RemoveListener(listener);
     }
 
-    // Event’i tetikleme
     public static void Trigger(string eventName)
     {
-        if (Instance.eventDictionary.TryGetValue(eventName, out UnityEvent thisEvent))
-        {
-            thisEvent.Invoke();
-        }
+        if (Instance?.eventDictionary.ContainsKey(eventName) == true)
+            Instance.eventDictionary[eventName].Invoke();
     }
-    
 }

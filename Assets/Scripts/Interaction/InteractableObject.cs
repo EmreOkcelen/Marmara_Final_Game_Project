@@ -14,6 +14,7 @@ public class InteractableUIController : MonoBehaviour
     private bool isInRange;
     private bool isPanelOpen;
 
+
     void Start()
     {
         if (promptObject != null)
@@ -90,15 +91,17 @@ public class InteractableUIController : MonoBehaviour
     {
         isPanelOpen = true;
         promptObject.SetActive(false);
+        GetComponent<MyTask>().isInteracted = true; // Örnek: etkileşim durumunu güncelle
         UIManager.Instance.ShowInteractionPanel(interactionText);
-        EventManager.Trigger("LockPlayerMovement");
+        EventManager.Trigger("UIOpen");
+        
     }
 
     void ClosePanel()
     {
         isPanelOpen = false;
         UIManager.Instance.HideInteractionPanel();
-        EventManager.Trigger("UnlockPlayerMovement");
+        EventManager.Trigger("UIClose");
     }
 
     // --- Editor Gizmo ---
