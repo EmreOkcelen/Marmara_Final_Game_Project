@@ -23,11 +23,10 @@ public class VRController : MonoBehaviour
     [SerializeField] private CharacterController characterController;
     
     [Header("Input Actions")]
-    [SerializeField] private XRController leftController;
-    [SerializeField] private XRController rightController;
+    // XRController is obsolete - using InputDevice approach instead
     
     [Header("Physics Settings")]
-    [SerializeField] private float gravity = 0;
+    [SerializeField] private float gravity = -9.81f;
     [SerializeField] private bool enableGravity = true;
     
     // Private variables
