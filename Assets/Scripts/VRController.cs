@@ -212,6 +212,71 @@ public class VRController : MonoBehaviour
     public Vector2 RightJoystickInput => rightJoystickInput;
     public Vector3 CurrentVelocity => characterController.velocity;
     
+    // VR Controller button states
+    public bool IsLeftTriggerPressed => GetTriggerValue(XRNode.LeftHand) > 0.7f;
+    public bool IsRightTriggerPressed => GetTriggerValue(XRNode.RightHand) > 0.7f;
+    public bool IsLeftGripPressed => GetGripValue(XRNode.LeftHand) > 0.7f;
+    public bool IsRightGripPressed => GetGripValue(XRNode.RightHand) > 0.7f;
+    public bool IsLeftPrimaryPressed => GetButtonPressed(XRNode.LeftHand, "primary");
+    public bool IsRightPrimaryPressed => GetButtonPressed(XRNode.RightHand, "primary");
+    
+    // Additional input methods
+    public float GetTriggerValue(XRNode hand)
+    {
+        InputDevice device = (hand == XRNode.LeftHand) ? leftHandDevice : rightHandDevice;
+        float value;
+        device.TryGetFeatureValue(CommonUsages.trigger, out value);
+        return value;
+    }
+    
+    public float GetGripValue(XRNode hand)
+    {
+        InputDevice device = (hand == XRNode.LeftHand) ? leftHandDevice : rightHandDevice;
+        float value;
+        device.TryGetFeatureValue(CommonUsages.grip, out value);
+        return value;
+    }
+    
+    public bool GetButtonPressed(XRNode hand, string buttonType)
+    {
+        InputDevice device = (hand == XRNode.LeftHand) ? leftHandDevice : rightHandDevice;
+        
+        switch (buttonType.ToLower())
+        {
+            case "primary":
+                bool primary;
+                device.TryGetFeatureValue(CommonUsages.primaryButton, out primary);
+                return primary;
+                
+            case "secondary":
+                bool secondary;
+                device.TryGetFeatureValue(CommonUsages.secondaryButton, out secondary);
+                return secondary;
+                
+            case "menu":
+                bool menu;
+                device.TryGetFeatureValue(CommonUsages.menuButton, out menu);
+                return menu;
+                
+            default:
+                return false;
+        }
+    }
+    
+    // Joystick direction helpers
+    public bool IsMovingForward => leftJoystickInput.y > 0.1f;
+    public bool IsMovingBackward => leftJoystickInput.y < -0.1f;
+    public bool IsMovingRight => leftJoystickInput.x > 0.1f;
+    public bool IsMovingLeft => leftJoystickInput.x < -0.1f;
+    public bool IsTurningRight => rightJoystickInput.x > 0.1f;
+    public bool IsTurningLeft => rightJoystickInput.x < -0.1f;
+    
+    // Movement speed getter
+    public float GetCurrentMoveSpeed()
+    {
+        return isSprinting ? moveSpeed * sprintMultiplier : moveSpeed;
+    }
+    
     private void OnDisable()
     {
         // Clean up if needed
