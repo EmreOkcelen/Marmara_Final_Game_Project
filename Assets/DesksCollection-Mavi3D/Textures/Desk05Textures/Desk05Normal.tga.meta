@@ -1,17 +1,9 @@
 fileFormatVersion: 2
-<<<<<<< Updated upstream:Assets/DesksCollection-Mavi3D/Textures/Desk05Textures/Desk05Normal.tga.meta
 guid: 79f44bc0d7bbbc6408734d06a63cfc4e
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 11
-=======
-guid: abc00000000011416952053089636381
-TextureImporter:
-  internalIDToNameTable: []
-  externalObjects: {}
   serializedVersion: 13
->>>>>>> Stashed changes:Assets/LeartesStudios/CountrysideInterior/Art/Textures/T_Default_Material_Grid_N.png.meta
   mipmaps:
     mipMapMode: 0
     enableMipMap: 1
@@ -32,11 +24,8 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
-<<<<<<< Updated upstream:Assets/DesksCollection-Mavi3D/Textures/Desk05Textures/Desk05Normal.tga.meta
-=======
   vTOnly: 0
   ignoreMipmapLimit: 0
->>>>>>> Stashed changes:Assets/LeartesStudios/CountrysideInterior/Art/Textures/T_Default_Material_Grid_N.png.meta
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -45,21 +34,12 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-<<<<<<< Updated upstream:Assets/DesksCollection-Mavi3D/Textures/Desk05Textures/Desk05Normal.tga.meta
-    filterMode: -1
-    aniso: -1
-    mipBias: -100
-    wrapU: -1
-    wrapV: -1
-    wrapW: -1
-=======
     filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 0
     wrapV: 0
     wrapW: 0
->>>>>>> Stashed changes:Assets/LeartesStudios/CountrysideInterior/Art/Textures/T_Default_Material_Grid_N.png.meta
   nPOTScale: 1
   lightmap: 0
   compressionQuality: 50
@@ -75,18 +55,8 @@ TextureImporter:
   alphaIsTransparency: 0
   spriteTessellationDetail: -1
   textureType: 1
-  textureShape: 1
+  textureShape: 2
   singleChannelComponent: 0
-<<<<<<< Updated upstream:Assets/DesksCollection-Mavi3D/Textures/Desk05Textures/Desk05Normal.tga.meta
-  maxTextureSizeSet: 0
-  compressionQualitySet: 0
-  textureFormatSet: 0
-  applyGammaDecoding: 0
-  platformSettings:
-  - serializedVersion: 3
-    buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
-=======
   flipbookRows: 1
   flipbookColumns: 1
   maxTextureSizeSet: 0
@@ -95,25 +65,11 @@ TextureImporter:
   ignorePngGamma: 0
   applyGammaDecoding: 1
   swizzle: 50462976
-  cookieLightType: 1
+  cookieLightType: 2
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 8192
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 3
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 1
-  - serializedVersion: 4
-    buildTarget: Standalone
-    maxTextureSize: 8192
->>>>>>> Stashed changes:Assets/LeartesStudios/CountrysideInterior/Art/Textures/T_Default_Material_Grid_N.png.meta
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -121,14 +77,22 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
-<<<<<<< Updated upstream:Assets/DesksCollection-Mavi3D/Textures/Desk05Textures/Desk05Normal.tga.meta
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-=======
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 1
->>>>>>> Stashed changes:Assets/LeartesStudios/CountrysideInterior/Art/Textures/T_Default_Material_Grid_N.png.meta
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites: []
@@ -143,24 +107,11 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-<<<<<<< Updated upstream:Assets/DesksCollection-Mavi3D/Textures/Desk05Textures/Desk05Normal.tga.meta
-  spritePackingTag: 
-  pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
-=======
     spriteCustomMetadata:
       entries: []
     nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
->>>>>>> Stashed changes:Assets/LeartesStudios/CountrysideInterior/Art/Textures/T_Default_Material_Grid_N.png.meta
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 211343
-  packageName: Desks starter collection
-  packageVersion: 2.0
-  assetPath: Assets/DesksCollection-Mavi3D/Textures/Desk05Textures/Desk05Normal.tga
-  uploadId: 698415
