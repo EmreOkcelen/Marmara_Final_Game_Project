@@ -66,7 +66,7 @@ namespace UnityEditor.XR.Interaction.Toolkit.Samples.Hands.Editor
                 IsRuleEnabled = () => PackageVersionUtility.GetPackageVersion(k_HandsPackageName) >= s_MinimumPackageVersion,
                 Message = $"[{k_SampleDisplayName}] {k_HandVisualizerSampleName} sample from XR Hands ({k_HandsPackageName}) package must be imported or updated to use this sample.",
                 Category = k_Category,
-                CheckPredicate = () => ProjectValidationUtility.SampleImportMeetsMinimumVersion(k_HandsPackageDisplayName, k_HandVisualizerSampleName, PackageVersionUtility.GetPackageVersion(k_HandsPackageName)),
+                CheckPredicate = () => IsSampleImported(k_HandsPackageName, k_HandVisualizerSampleName),
                 FixIt = () =>
                 {
                     if (TryFindSample(k_HandsPackageName, string.Empty, k_HandVisualizerSampleName, out var sample))
@@ -75,13 +75,13 @@ namespace UnityEditor.XR.Interaction.Toolkit.Samples.Hands.Editor
                     }
                 },
                 FixItAutomatic = true,
-                Error = !ProjectValidationUtility.HasSampleImported(k_HandsPackageDisplayName, k_HandVisualizerSampleName),
+                Error = !IsSampleImported(k_HandsPackageName, k_HandVisualizerSampleName),
             },
             new BuildValidationRule
             {
-                Message = $"[{k_SampleDisplayName}] {k_StarterAssetsSampleName} sample from XR Interaction Toolkit ({k_XRIPackageName}) package must be imported or updated to use this sample. {GetImportSampleVersionMessage(k_Category, k_StarterAssetsSampleName, PackageVersionUtility.GetPackageVersion(k_XRIPackageName))}",
+                Message = $"[{k_SampleDisplayName}] {k_StarterAssetsSampleName} sample from XR Interaction Toolkit ({k_XRIPackageName}) package must be imported or updated to use this sample. {GetImportSampleVersionMessage(k_XRIPackageName, k_StarterAssetsSampleName, PackageVersionUtility.GetPackageVersion(k_XRIPackageName))}",
                 Category = k_Category,
-                CheckPredicate = () => ProjectValidationUtility.SampleImportMeetsMinimumVersion(k_Category, k_StarterAssetsSampleName, PackageVersionUtility.GetPackageVersion(k_XRIPackageName)),
+                CheckPredicate = () => IsSampleImported(k_XRIPackageName, k_StarterAssetsSampleName),
                 FixIt = () =>
                 {
                     if (TryFindSample(k_XRIPackageName, string.Empty, k_StarterAssetsSampleName, out var sample))
@@ -90,7 +90,7 @@ namespace UnityEditor.XR.Interaction.Toolkit.Samples.Hands.Editor
                     }
                 },
                 FixItAutomatic = true,
-                Error = !ProjectValidationUtility.HasSampleImported(k_Category, k_StarterAssetsSampleName),
+                Error = !IsSampleImported(k_XRIPackageName, k_StarterAssetsSampleName),
             },
             new BuildValidationRule
             {
@@ -225,9 +225,14 @@ namespace UnityEditor.XR.Interaction.Toolkit.Samples.Hands.Editor
             }
         }
 
+        static bool IsSampleImported(string packageName, string sampleDisplayName)
+        {
+            return TryFindSample(packageName, string.Empty, sampleDisplayName, out var sample) && sample.isImported;
+        }
+
         static string GetImportSampleVersionMessage(string packageFolderName, string sampleDisplayName, PackageVersion version)
         {
-            if (ProjectValidationUtility.SampleImportMeetsMinimumVersion(packageFolderName, sampleDisplayName, version) || !ProjectValidationUtility.HasSampleImported(packageFolderName, sampleDisplayName))
+            if (IsSampleImported(packageFolderName, sampleDisplayName))
                 return string.Empty;
 
             return $"An older version of {sampleDisplayName} has been found. This may cause errors.";
