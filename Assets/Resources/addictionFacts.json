@@ -4,9 +4,19 @@
     "Uyuşturucu bağımlılığı, gençlerde okul başarısını %50 oranında düşürebilir.",
     "Bağımlılığın gelişmesinde genetik faktörlerin %40 etkisi vardır.",
     "Türkiye'de bağımlılık tedavisi görenlerin %70’i 15-25 yaş arası gençlerden oluşuyor.",
-    "Sosyal destek, bağımlılıkla mücadelede en etkili unsurlardan biridir."
+    "Sosyal destek, bağımlılıkla mücadelede en etkili unsurlardan biridir.",
+    "Alkol ömür boyu kalıcı ve yıkıcı hasarlara neden olabilir. Hafıza, dil, akıl, yürütme ve problem çözme yetilerini ciddi şekilde etkileyen demans bunlardan biridir.",
+    "Alkol bağımlılığı sonucu yetersiz beslenmenin yol açtığı tiamin (B1 vitamini) eksikliği beynin derinliklerinde hasara yol açarak ciddi bilişsel eksikliklere neden olabilir.",
+    "Alkolizmin temel özelliği, bu davranışın olumsuz etkileri bilindiği hâlde büyük miktarlarda alkol tüketiminin devam etmesidir.",
+    "Alkolün neden olduğu fiziksel bağımlılık, bireyde çok güçlü bir içki içme isteğine yol açabilir ve bu durum içkiyi bırakma yeteneğini azaltır.",
+    "Kronik alkolizm, bilişsel zaman algısını bozar ve ince motor becerilerini zayıflatır.",
+    "Alkol bağımlısı bireyler yürütücü işlevlerde, görsel-mekânsal yetilerde ve yürüme/denge becerilerinde bozulmalar gösterir.",
+    "Alkol derin uykuya dalmayı geciktirir ve derin uyku sırasında uyanma sıklığını artırır.",
+    "Aşırı alkol tüketimi (binge drinking), şiddet içeren suçlar ve yaralanmaların başlıca nedenlerinden biridir.",
+    "Ölümcül şekilde yaralanan sürücülerin büyük bir kısmında yüksek düzeyde alkol tespit edilmiştir, bu da binge drinking'in trafik kazası riskini artırdığını gösterir.",
+    "Alkol, böbrek işlevini doğrudan (akut veya kronik tüketim yoluyla) ya da dolaylı olarak (karaciğer hastalığına bağlı olarak) etkileyebilir."
   ],
-  "LinesV1": [
+  "ilkSahne": [
     "Ben Deniz. 27 yaşındayım.",
     "Yıllardır alkol bataklığındayım.",
     "Bu öyle bir bataklık ki kendimi tanıtırken bile üçüncü sırada ondan bahsetmek zorunda kaldım.",
@@ -16,9 +26,27 @@
     "Ve bir gün bu gidişata dur demem gerektiğine karar verdim.",
     "Merak ediyorsan, işte o günüm."
   ],
-  "LinesV2": [
-    "İkinci Siyah Ekran....",
-    "Bu yaşındayım mm",
-    "Buraya istediğin kadar cümle ekleyebilirsin."
+  "Dus": [
+    "Soğuk bir duş aldım fakat kafam hala yerinde değil."
+  ],
+  "EvdenAyrılma": [
+    "Evden geç çıkmıştım.",
+    "Kapının önünde komşu yakaladı. Gece yine çok ses yaptığımdan yakındı.",
+    "Her zamanki gibi hiçbir şey hatırlamıyordum;",
+    "her zamanki gibi utanarak özür dilerim.",
+    "Aceleyle metroya yürüdüm."
+  ],
+  "Metroayrilma": [
+    "Metroda midem bulandı. İki istasyon sonra inip dışarı çıkarak temiz hava almak zorunda kaldım.",
+    "Aynı ay içerisinde belki onuncu defa işe geç gitmiş oldum."
+  ],
+  "SonSahne": [
+    "Müdürle yaptığım toplantıda işten çıkarıldığımı öğrendim.",
+    "Başından beri berbat geçen günümün zirvesi bu oldu.",
+    "O gün içimde ilk defa \"bu böyle gitmez\" hissi oluştu.",
+    "Eskisi gibi yaşamayı özlediğimi fark ettim.",
+    "Eve dönünce bir uzmandan randevu aldım.",
+    "Bu bağımlılıktan kurtulacağım.",
+    "Hayatımın elimden kayıp gitmesine izin vermeyeceğim."
   ]
 }
