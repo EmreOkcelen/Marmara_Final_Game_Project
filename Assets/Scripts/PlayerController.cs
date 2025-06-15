@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     public float sprintSpeed = 10f;
     [Range(0f, 1f)] public float movementSmoothing = 0.2f;
     private Vector3 velocityRef;  // SmoothDamp referansı
+    public bool CanMove = true;  // Hareket kontrolü için değişken
 
     [Header("Rotation Settings")]
     private float targetCameraX = 0f;
@@ -35,8 +36,8 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         playerInputs = new PlayerInputs();
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
     }
 
     private void OnEnable()
@@ -48,14 +49,15 @@ public class PlayerController : MonoBehaviour
         p.Look.canceled  += ctx => lookInput = Vector2.zero;
         p.Sprint.performed += _ => sprintInput = true;
         p.Sprint.canceled  += _ => sprintInput = false;
-        p.Jump.performed += _ =>
-        {
-            if (isGrounded && !isUIOpen)
-            {
-                rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-                isGrounded = false;
-            }
-        };
+        // Jump fonksiyonu kaldırıldı - Space tuşu Game2'de teleportasyon için kullanılıyor
+        // p.Jump.performed += _ =>
+        // {
+        //     if (isGrounded && !isUIOpen)
+        //     {
+        //         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        //         isGrounded = false;
+        //     }
+        // };
         p.Enable();
         // UI açıldığında hareketi kilitle
         // UI kapandığında hareketi aç
@@ -112,7 +114,11 @@ public class PlayerController : MonoBehaviour
         );
 
         // Uygula, dikey hızı koru
-        rb.linearVelocity = new Vector3(smoothVel.x, rb.linearVelocity.y, smoothVel.z);
+        if (CanMove)
+        {
+            rb.linearVelocity = new Vector3(smoothVel.x, rb.linearVelocity.y, smoothVel.z);
+        }
+        
     }
 
     private void OnCollisionEnter(Collision collision)
