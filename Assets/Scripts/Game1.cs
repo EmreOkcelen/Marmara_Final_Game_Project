@@ -3,6 +3,10 @@ using System.Collections;
 
 public class Game1 : MonoBehaviour
 {
+    [Header("Game Control")]
+    [Tooltip("Game1 başlatılsın mı?")]
+    public bool isGameStarted = false;
+    
     [Header("Telefon Objesi ve Shake Ayarları")]
     public GameObject Phone;
     [Tooltip("Maksimum açı sapması (derece cinsinden)")]
@@ -37,6 +41,18 @@ public class Game1 : MonoBehaviour
 
     void Update()
     {
+        // Debug: G tuşu ile Game1'i başlat/durdur (test için)
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            if (isGameStarted)
+                StopGame1();
+            else
+                StartGame1();
+        }
+        
+        // Game başlatılmadıysa hiçbir şey yapma
+        if (!isGameStarted) return;
+        
         // Boşluk tuşuna basınca çalmaya başla/durdur
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -45,6 +61,25 @@ public class Game1 : MonoBehaviour
             else
                 PhoneRingAnimation();
         }
+    }
+
+    /// <summary>
+    /// Game1'i başlatan fonksiyon - Bu çağrılana kadar game çalışmaz
+    /// </summary>
+    public void StartGame1()
+    {
+        isGameStarted = true;
+        Debug.Log("Game1 başlatıldı! Space tuşu ile telefonu çaldırabilirsiniz.");
+    }
+
+    /// <summary>
+    /// Game1'i durduran fonksiyon
+    /// </summary>
+    public void StopGame1()
+    {
+        isGameStarted = false;
+        StopPhoneRing(); // Eğer çalıyorsa durdur
+        Debug.Log("Game1 durduruldu!");
     }
 
     // Sallamayı başlatan fonksiyon

@@ -2,16 +2,13 @@ using UnityEngine;
 
 public class LambTask : MyTask
 {
-
     public override bool CheckCompletion()
     {
         if (isInteracted)
         {
-            Debug.Log($"[{name}] görev tamamlandý!");
+            Debug.Log($"[{name}] gÃ¶rev tamamlandÄ±!");
+            return true; // GÃ¶rev tamamlandÄ±
         }
-        return false; // Görev tamamlanmadý
-
+        return false; // GÃ¶rev tamamlanmadÄ±
     }
-
-
 }

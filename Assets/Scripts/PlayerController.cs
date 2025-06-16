@@ -36,8 +36,8 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         playerInputs = new PlayerInputs();
-        //Cursor.lockState = CursorLockMode.Locked;
-        //Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     private void OnEnable()
@@ -83,7 +83,7 @@ public class PlayerController : MonoBehaviour
         transform.Rotate(Vector3.up * lookInput.x * Time.deltaTime * ySensitivity);
         // Dikey kamera açısı
         targetCameraX -= lookInput.y * Time.deltaTime * xSensitivity;
-        targetCameraX = Mathf.Clamp(targetCameraX, -60f, 60f);
+        targetCameraX = Mathf.Clamp(targetCameraX, -90f, 90f);
     }
 
     private void LateUpdate()

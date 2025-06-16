@@ -28525,7 +28525,6 @@ GameObject:
   - component: {fileID: 2128757527}
   - component: {fileID: 2128757526}
   - component: {fileID: 2128757525}
-  - component: {fileID: 2128757524}
   m_Layer: 0
   m_Name: SkySphere
   m_TagString: Untagged
@@ -28533,27 +28532,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 1
   m_IsActive: 1
---- !u!135 &2128757524
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2128757523}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &2128757525
 MeshRenderer:
   m_ObjectHideFlags: 0

@@ -28,9 +28,10 @@ public class InteractableUIController : MonoBehaviour
     void Update()
     {
         UpdateRange();
-        if (isInRange)
+        
+        // Panel açıkken veya mevcut görevse etkileşim kontrolü yap
+        if ((isInRange && TaskManager.Instance.currentTask == GetComponent<MyTask>()) || isPanelOpen)
             CheckForInteraction();
-
     }
 
     void LateUpdate()
@@ -45,7 +46,7 @@ public class InteractableUIController : MonoBehaviour
         bool playerNear = Physics.OverlapBox(transform.position, boxSize * 0.5f, transform.rotation)
                                .Any(c => c.CompareTag("Player"));
 
-        if (playerNear && !isInRange)
+        if (playerNear && !isInRange && TaskManager.Instance.currentTask == GetComponent<MyTask>())
             ShowPrompt();
         else if (!playerNear && isInRange)
             HidePrompt();
@@ -91,10 +92,17 @@ public class InteractableUIController : MonoBehaviour
     {
         isPanelOpen = true;
         promptObject.SetActive(false);
-        GetComponent<MyTask>().isInteracted = true; // Örnek: etkileşim durumunu güncelle
+        
+        // MyTask ile etkileşime geç
+        MyTask myTask = GetComponent<MyTask>();
+        if (myTask != null)
+        {
+            myTask.isInteracted = true;
+            myTask.Interact(); // Task sistemine etkileşimi bildir
+        }
+        
         UIManager.Instance.ShowInteractionPanel(interactionText);
         EventManager.Trigger("UIOpen");
-        
     }
 
     void ClosePanel()
