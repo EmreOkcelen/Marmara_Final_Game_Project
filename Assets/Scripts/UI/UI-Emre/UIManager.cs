@@ -13,6 +13,8 @@ public class UIManager : MonoBehaviour
     public GameObject inGameUI;
     public GameObject talkingWithMyselfPanel;
 
+    public TMP_Text gorevText;
+
     [SerializeField] private string[] gameplayScenes;
 
 

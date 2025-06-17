@@ -1,8 +1,13 @@
 using UnityEngine;
 using System.Collections;
+using System.Linq;
 
 public class Game2 : MonoBehaviour
 {
+    [Header("Game Control")]
+    [Tooltip("Game2 başlatılsın mı?")]
+    public bool isGameStarted = false;
+    public bool isGameFinished = false; // Game2 bitince true olacak
 
     [Header("Movement Settings")]
     public Transform targetTransform; // Hedef pozisyon
@@ -22,6 +27,12 @@ public class Game2 : MonoBehaviour
     public float initialAreaSize = 2f;     // Başlangıç alan boyutu
     public float sizeReduction = 0.2f;     // Her başarıda küçülme miktarı
     public float minAreaSize = 0.5f;       // Minimum alan boyutu
+
+    [Header("Player Detection Settings")]
+    public Vector3 boxSize = new Vector3(2f, 2f, 2f); // Trigger alanı boyutu
+    public string playerTag = "Player";     // Player tag'ı
+    
+    private bool isInRange = false;         // Player alan içinde mi?
 
     private float currentAreaSize;         // Güncel alan boyutu
     private Vector3 greenAreaPosition;     // Yeşil alanın pozisyonu
@@ -46,24 +57,23 @@ public class Game2 : MonoBehaviour
     void Start()
     {
         currentAreaSize = 1f;
-        // Git-gel hareketini başlat
-        if (pingPongObject != null && pointA != null && pointB != null)
-        {
-            StartCoroutine(PingPongMovement());
-        }
-
-        SpawnGreenArea();
-
+        // Game2 başlangıçta başlatılmaz, player alana girdiğinde başlar
+        Debug.Log("Game2 hazır. Player alana girdiğinde başlayacak.");
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Player alan kontrolü (Game başlamamışsa da çalışsın)
+        UpdateRange();
+        
+        // Debug: J tuşu ile Game2'yi tamamen bitir (test için)
+        
+        // Game başlatılmadıysa hiçbir şey yapma
+        if (!isGameStarted) return;
+        
+        if(isGameFinished) return; // Eğer oyun bitmişse hiçbir şey yapma
         // Space tuşuna basıldığında ışınlanma
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            TeleportObject();
-        }
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (isPlayerInGreenArea)
@@ -80,6 +90,7 @@ public class Game2 : MonoBehaviour
     {
         if (objectToMove != null && targetTransform != null)
         {
+            objectToMove.GetComponent<Rigidbody>().isKinematic = true; // Fizik etkilerini devre dışı bırak
             objectToMove.transform.position = targetTransform.position;
             if (playerController != null)
             {
@@ -93,7 +104,7 @@ public class Game2 : MonoBehaviour
     {
         Vector3 targetPoint = pointB.position;
 
-        while (true)
+        while (isGameStarted && !isGameFinished)
         {
             // Hedefe doğru hareket et
             while (Vector3.Distance(pingPongObject.transform.position, targetPoint) > 0.001f)
@@ -140,9 +151,122 @@ public class Game2 : MonoBehaviour
         // Alan boyutunu küçült
         currentAreaSize = currentAreaSize - sizeReduction;
 
+        // Minimum boyut kontrolü - eğer çok küçükse Game2'yi bitir
+        if (currentAreaSize <= minAreaSize)
+        {
+            Debug.Log("Minimum alan boyutuna ulaşıldı! Game2 tamamlandı!");
+            FinishGame2();
+            return;
+        }
+
         // Alanı yeni pozisyon ve boyutta güncelle
         SpawnGreenArea();
 
         Debug.Log($"Başarılı! Yeni alan boyutu: {currentAreaSize}");
+    }
+
+    /// <summary>
+    /// Game2'yi başlatan fonksiyon - Bu çağrılana kadar game çalışmaz
+    /// </summary>
+    public void StartGame2()
+    {
+        isGameStarted = true;
+        TeleportObject(); // Başlangıçta objeyi ışınla
+        // Git-gel hareketini başlat
+        if (pingPongObject != null && pointA != null && pointB != null)
+        {
+            StartCoroutine(PingPongMovement());
+        }
+
+        SpawnGreenArea();
+
+        
+        
+    }
+    void UpdateRange()
+    {
+        bool playerNear = Physics.OverlapBox(transform.position, boxSize * 0.5f, transform.rotation)
+                               .Any(c => c.CompareTag("Player"));
+
+        if (playerNear && !isInRange)
+            ShowPrompt();
+        else if (!playerNear && isInRange)
+            HidePrompt();
+
+        isInRange = playerNear;
+    }
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.matrix = Matrix4x4.TRS(transform.position, transform.rotation, transform.lossyScale);
+        Gizmos.DrawWireCube(Vector3.zero, boxSize);
+        Gizmos.matrix = Matrix4x4.identity;
+    }
+
+    /// <summary>
+    /// Game2'yi durduran fonksiyon
+    /// </summary>
+    public void StopGame2()
+    {
+        isGameStarted = false;
+        StopAllCoroutines(); // Tüm coroutine'ları durdur
+        Debug.Log("Game2 durduruldu!");
+    }
+
+    /// <summary>
+    /// Game2'yi tamamen bitiren ve tüm aktiviteleri durduran fonksiyon
+    /// Bu çağrıldıktan sonra Game2 ile ilgili hiçbir şey çalışmaz
+    /// </summary>
+    public void FinishGame2()
+    {
+        // Oyunu durdur
+        isGameStarted = false;
+        isGameFinished = true; // Game2 bitince true olacak
+        
+        
+        // Tüm coroutine'ları durdur
+        StopAllCoroutines();
+        
+        // Player hareket kısıtlamasını kaldır
+        if (playerController != null)
+        {
+            playerController.CanMove = true;
+        }
+        
+        // Yeşil alanı gizle
+        if (greenAreaObject != null)
+        {
+            greenAreaObject.SetActive(false);
+        }
+        
+        // Durumu sıfırla
+        currentAreaSize = initialAreaSize;
+        isPlayerInGreenArea = false;
+        objectToMove.GetComponent<Rigidbody>().isKinematic = false; // Fizik etkilerini geri al
+        Game1.Instance.StartGame1(); // Game1'i yeniden başlat
+        
+        Debug.Log("Game2 tamamen bitirildi! Yeniden başlatmak için StartGame2() çağrılmalı.");
+    }
+
+    /// <summary>
+    /// Player alan içine girdiğinde çağrılan fonksiyon
+    /// </summary>
+    void ShowPrompt()
+    {
+        Debug.Log("Player Game2 alanına girdi! Game2 başlatılıyor...");
+        
+        // Game2'yi başlat (eğer henüz başlamamışsa)
+        if (!isGameStarted && !isGameFinished)
+        {
+            StartGame2();
+        }
+    }
+
+    /// <summary>
+    /// Player alan dışına çıktığında çağrılan fonksiyon
+    /// </summary>
+    void HidePrompt()
+    {
+        Debug.Log("Player Game2 alanından çıktı!");
     }
 }

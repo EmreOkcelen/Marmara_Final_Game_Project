@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine.UIElements;
+using System;
 
 public class TaskManager : MonoBehaviour
 {
@@ -36,14 +37,15 @@ public class TaskManager : MonoBehaviour
 
         OnAllTasksCompleted += () =>
         {
-            Game1 game1 = FindFirstObjectByType<Game1>();
-            if (game1 != null)
+            Game2 game2 = FindFirstObjectByType<Game2>();
+            if (game2 != null)
             {
-                game1.StartGame1();
+                UIManager.Instance.gorevText.text = "Kendine gelmen lazım mutfakta kahve yap";
+
             }
             else
             {
-                Debug.LogWarning("Game1 script bulunamadı, görev tamamlandığında yapılacak işlemler atlanıyor.");
+                Debug.LogWarning("game2 script bulunamadı, görev tamamlandığında yapılacak işlemler atlanıyor.");
             }
             // Burada tüm görevler tamamlandığında yapılacak işlemler
             }
@@ -76,8 +78,33 @@ public class TaskManager : MonoBehaviour
         {
             Debug.Log("mevcut görev:" + (currentTask ? currentTask.name : "Yok"));
         }
-        currentTaskText.text = currentTask.name + " ile etkileşimde bulun" + "(" + GetCompletedTaskCount() + "/" + (GetTotalTaskCount()-1)  + ")";
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            CompleteCurrentTask();
+        }
+        
+        currentTaskText.text = currentTask.name + " ile etkileşimde bulun" + "(" + GetCompletedTaskCount() + "/" + (GetTotalTaskCount())  + ")";
     }
+    // Tüm görevleri tamamla (debug amaçlı)
+    public void CompleteAllTasks()
+    {
+        Debug.Log("Tüm görevler manuel olarak tamamlanıyor...");
+        
+        foreach (MyTask task in allTasks)
+        {
+            if (!task.IsCompleted)
+            {
+                task.Complete();
+                OnTaskCompleted?.Invoke(task);
+                Debug.Log($"Görev tamamlandı: {task.name}");
+            }
+        }
+        
+        currentTask = null;
+        Debug.Log("Tüm görevler tamamlandı!");
+        OnAllTasksCompleted?.Invoke();
+    }
+
 
     // Görevleri başlat
     private void InitializeTasks()

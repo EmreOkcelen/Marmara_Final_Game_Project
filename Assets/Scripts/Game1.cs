@@ -6,6 +6,7 @@ public class Game1 : MonoBehaviour
     [Header("Game Control")]
     [Tooltip("Game1 başlatılsın mı?")]
     public bool isGameStarted = false;
+    public bool isGameFinished = false; // Game1 bitince true olacak
     
     [Header("Telefon Objesi ve Shake Ayarları")]
     public GameObject Phone;
@@ -19,48 +20,35 @@ public class Game1 : MonoBehaviour
     private Quaternion originalRot;
     private bool isShaking;
     private AudioSource audioSource;
+    public static Game1 Instance;
 
     void Start()
     {
         // Orijinal rotasyonu sakla
         originalRot = Phone.transform.localRotation;
-        
+
         // AudioSource component'ini ekle ve 3D ses için ayarla
         audioSource = Phone.GetComponent<AudioSource>();
         if (audioSource == null)
         {
             audioSource = Phone.AddComponent<AudioSource>();
         }
-        
+
         audioSource.clip = ringTone;
         audioSource.spatialBlend = 1.0f; // 3D ses için
         audioSource.loop = true; // Sesi sürekli tekrarla
         audioSource.playOnAwake = false;
         audioSource.volume = 1.0f; // Ses seviyesi
+        audioSource.enabled = false; // Başlangıçta devre dışı bırak
     }
 
     void Update()
     {
-        // Debug: G tuşu ile Game1'i başlat/durdur (test için)
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            if (isGameStarted)
-                StopGame1();
-            else
-                StartGame1();
-        }
         
         // Game başlatılmadıysa hiçbir şey yapma
         if (!isGameStarted) return;
         
-        // Boşluk tuşuna basınca çalmaya başla/durdur
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (isShaking)
-                StopPhoneRing();
-            else
-                PhoneRingAnimation();
-        }
+        
     }
 
     /// <summary>
@@ -69,6 +57,16 @@ public class Game1 : MonoBehaviour
     public void StartGame1()
     {
         isGameStarted = true;
+
+        // AudioSource'u yeniden etkinleştir (eğer FinishGame1() ile devre dışı bırakıldıysa)
+        if (audioSource != null)
+        {
+            audioSource.enabled = true;
+            audioSource.Play(); // Başlangıçta sesi çal
+        }
+
+        
+        
         Debug.Log("Game1 başlatıldı! Space tuşu ile telefonu çaldırabilirsiniz.");
     }
 
@@ -80,6 +78,43 @@ public class Game1 : MonoBehaviour
         isGameStarted = false;
         StopPhoneRing(); // Eğer çalıyorsa durdur
         Debug.Log("Game1 durduruldu!");
+    }
+
+    /// <summary>
+    /// Game1'i tamamen bitiren ve tüm aktiviteleri durduran fonksiyon
+    /// Bu çağrıldıktan sonra Game1 ile ilgili hiçbir şey çalışmaz
+    /// </summary>
+    public void FinishGame1()
+    {
+        // Oyunu durdur
+        isGameStarted = false;
+        isGameFinished = true; // Game1 bitince true olacak
+
+        // Tüm coroutine'ları durdur
+        StopAllCoroutines();
+
+        // Ses ve animasyonu durdur
+        StopPhoneRing();
+
+        // AudioSource'u tamamen devre dışı bırak
+        if (audioSource != null)
+        {
+            audioSource.Stop();
+            audioSource.enabled = false;
+        }
+
+        // Telefonu orijinal pozisyonuna getir
+        if (Phone != null)
+        {
+            Phone.transform.localRotation = originalRot;
+        }
+
+        // Durumu sıfırla
+        isShaking = false;
+
+        Debug.Log("Game1 tamamen bitirildi! Yeniden başlatmak için StartGame1() çağrılmalı.");
+        
+             
     }
 
     // Sallamayı başlatan fonksiyon
