@@ -1091,7 +1091,7 @@ MonoBehaviour:
   typeSound: {fileID: 315037959}
   typingSpeed: 0.1
   selectedVersion: 0
-  nextSceneName: BedRoom
+  nextSceneName: Bathroom
 --- !u!1 &9115568379735389517
 GameObject:
   m_ObjectHideFlags: 0

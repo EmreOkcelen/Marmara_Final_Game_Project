@@ -1,6 +1,8 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.XR;
 
 public class BlackScreenManager : MonoBehaviour
 {
@@ -8,17 +10,55 @@ public class BlackScreenManager : MonoBehaviour
     [SerializeField] private AudioSource typeSound;
     [SerializeField] private float typingSpeed = 0.05f;
 
+    private InputDevice leftController;
+    private InputDevice rightController;
+
     private string[] dialogLines;
     private int currentLine = 0;
     private bool isTyping = false;
 
     // Hangi versiyon kullan�lacak, inspector veya ba�ka script'ten atanabilir
-    public enum DialogVersion {ilkSahne,Dus,EvdenAyrılma,MetroAyrılma,SonSahne }
+    public enum DialogVersion {ilkSahne,Dus,EvdenAyrilma,MetroAyrilma,SonSahne }
     [SerializeField] private DialogVersion selectedVersion = DialogVersion.ilkSahne;
 
     [Header("Diyalog bitti�inde ge�ilecek sahne")]
     [SerializeField] private string nextSceneName;  // Inspector'dan sahne ad� girilecek
 
+    private void Awake()
+    {
+        InputDevices.deviceConnected += OnDeviceConnected;
+        InitializeOpenXRControllers();
+    }
+    private void OnDestroy()
+    {
+        InputDevices.deviceConnected -= OnDeviceConnected;
+    }
+    private void OnDeviceConnected(InputDevice device)
+    {
+        InitializeOpenXRControllers();
+    }
+
+    private void InitializeOpenXRControllers()
+    {
+        var allDevices = new List<InputDevice>();
+        InputDevices.GetDevices(allDevices);
+
+        foreach (var d in allDevices)
+        {
+            if ((d.characteristics & InputDeviceCharacteristics.Left) != 0 &&
+                (d.characteristics & InputDeviceCharacteristics.Controller) != 0)
+            {
+                leftController = d;
+                Debug.Log($"🤚 Sol kontrolcü: {d.name}");
+            }
+            if ((d.characteristics & InputDeviceCharacteristics.Right) != 0 &&
+                (d.characteristics & InputDeviceCharacteristics.Controller) != 0)
+            {
+                rightController = d;
+                Debug.Log($"🤚 Sağ kontrolcü: {d.name}");
+            }
+        }
+    }
     private void Start()
     {
         if (BlackScreenState.Instance != null)
@@ -49,8 +89,8 @@ public class BlackScreenManager : MonoBehaviour
                 case DialogVersion.ilkSahne:
                     dialogLines = data.ilkSahne?.ToArray();
                     break;
-                case DialogVersion.EvdenAyrılma:
-                    dialogLines = data.EvdenAyrılma?.ToArray();
+                case DialogVersion.EvdenAyrilma:
+                    dialogLines = data.EvdenAyrilma?.ToArray();
                     break;
                 default:
                     dialogLines = new string[] { "Diyalog versiyonu se�ilmedi." };
@@ -68,7 +108,8 @@ public class BlackScreenManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) || leftController.TryGetFeatureValue(CommonUsages.primaryButton, out bool primaryButtonPressed) && primaryButtonPressed ||
+            rightController.TryGetFeatureValue(CommonUsages.primaryButton, out bool secondaryButtonPressed) && secondaryButtonPressed)
         {
             if (!isTyping)
             {

@@ -6,8 +6,8 @@ public class GameTextData
     public List<string> facts;
     public List<string> ilkSahne;
     public List<string> Dus;
-    public List<string> EvdenAyrýlma;
-    public List<string> MetroAyrýlma;
+    public List<string> EvdenAyrilma;
+    public List<string> MetroAyrilma;
     public List<string> SonSahne;
 }
 
