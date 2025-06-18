@@ -127,9 +127,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1577873065523829746, guid: 24170ae0777b34aefb011642bfc9cee7, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.354
+      objectReference: {fileID: 0}
     - target: {fileID: 4875360644732008504, guid: 24170ae0777b34aefb011642bfc9cee7, type: 3}
       propertyPath: m_Name
       value: PCicin
+      objectReference: {fileID: 0}
+    - target: {fileID: 6362104226091815380, guid: 24170ae0777b34aefb011642bfc9cee7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7806170629298018271, guid: 24170ae0777b34aefb011642bfc9cee7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12392,6 +12400,22 @@ PrefabInstance:
     - target: {fileID: 1033146442919327985, guid: 751c57d139dab412f937c3dc2a71ac26, type: 3}
       propertyPath: m_Name
       value: SceneChanger
+      objectReference: {fileID: 0}
+    - target: {fileID: 4243620021916600304, guid: 751c57d139dab412f937c3dc2a71ac26, type: 3}
+      propertyPath: m_Size.x
+      value: 0.74262524
+      objectReference: {fileID: 0}
+    - target: {fileID: 4243620021916600304, guid: 751c57d139dab412f937c3dc2a71ac26, type: 3}
+      propertyPath: m_Size.z
+      value: 1.0748487
+      objectReference: {fileID: 0}
+    - target: {fileID: 4243620021916600304, guid: 751c57d139dab412f937c3dc2a71ac26, type: 3}
+      propertyPath: m_Center.x
+      value: 0.12868738
+      objectReference: {fileID: 0}
+    - target: {fileID: 4243620021916600304, guid: 751c57d139dab412f937c3dc2a71ac26, type: 3}
+      propertyPath: m_Center.z
+      value: -0.23455024
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

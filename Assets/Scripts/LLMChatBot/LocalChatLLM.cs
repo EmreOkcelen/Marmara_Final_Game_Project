@@ -11,7 +11,7 @@ public class LocalChatLLM : MonoBehaviour
 {
    // public TextMeshProUGUI npcReactionText;
 
-    private const string OpenRouterApiKey = "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";
+    private const string OpenRouterApiKey = "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";
     private const string OpenRouterApiUrl = "https://openrouter.ai/api/v1/chat/completions";
 
     public static LocalChatLLM Instance;
@@ -39,17 +39,12 @@ public class LocalChatLLM : MonoBehaviour
         Debug.Log("Başlangıç diyaloğu kuyruğu dolduruldu.");
     }
 
-    public void GenerateNPCReaction()
+    public void GenerateNPCReaction(Action<string> onDialogueReady)
     {
-        Debug.Log("GenerateNPCReaction çağrıldı, dialogueQueue.Count = " + dialogueQueue.Count);
-
         if (dialogueQueue.Count > 0)
         {
-            Debug.Log("buraya giriyorha");
             string nextDialogue = dialogueQueue.Dequeue();
-           // npcReactionText.text = nextDialogue;
-            Debug.Log("John Amca: " + nextDialogue);
-
+            onDialogueReady?.Invoke(nextDialogue);
 
             if (!isFetchingNewDialogue && dialogueQueue.Count < 2)
             {
@@ -58,8 +53,7 @@ public class LocalChatLLM : MonoBehaviour
         }
         else
         {
-         //   npcReactionText.text = "Diyalog yükleniyor...";
-            Debug.Log("John Amca: Diyalog yükleniyor...");
+            onDialogueReady?.Invoke("Diyalog yükleniyor...");
             if (!isFetchingNewDialogue)
             {
                 StartCoroutine(GetChatResponse());
@@ -68,11 +62,12 @@ public class LocalChatLLM : MonoBehaviour
     }
 
 
+
     IEnumerator GetChatResponse()
     {
         isFetchingNewDialogue = true;
 
-        string systemPrompt = "Sen acımasız, sert, kaba ve sinirli bir sokak NPC'sisin. Biri sana çarptığında, kesinlikle kırıcı, iğrenç, küçümseyici ve sinirli bir şekilde 1-2 cümleyle sitem et. Kibar olma, lafı geveleme, doğrudan vur.";
+        string systemPrompt = "Sen acımasız, sert, kaba ve sinirli bir sokak NPC'sisin. Sana biri çarptığında, kesinlikle kırıcı, iğrenç, küçümseyici ve sinirli bir şekilde 1-2 cümleyle sert bir tepki ver. Kibar olma, lafı geveleme, doğrudan ve net ol. (Küfür etme.)";
         string userPrompt = "Bir alkol bağımlısı sana çarptı. Ona 1-2 cümle ile iğrenç, sert ve sinirli şekilde kırıcı bir cevap ver.";
 
         string json = @"{
