@@ -22,7 +22,8 @@ public class BlackScreenManager : MonoBehaviour
     [SerializeField] private DialogVersion selectedVersion = DialogVersion.ilkSahne;
 
     [Header("Diyalog bitti�inde ge�ilecek sahne")]
-    [SerializeField] private string nextSceneName;  // Inspector'dan sahne ad� girilecek
+    public static string nextSceneName;
+    public static string mySceneNext;  // Inspector'dan sahne ad� girilecek
 
     private void Awake()
     {
@@ -121,10 +122,10 @@ public class BlackScreenManager : MonoBehaviour
                 else
                 {
                     // Diyalog bitti�inde:
-                    if (!string.IsNullOrEmpty(nextSceneName))
+                    if (!string.IsNullOrEmpty(mySceneNext))
                     {
                         BlackScreenState.Instance.AdvanceToNext();
-                        SceneLoader.LoadSceneWithLoading(nextSceneName);
+                        SceneLoader.LoadSceneWithLoading(mySceneNext);
                     }
                 }
             }

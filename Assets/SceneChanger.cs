@@ -21,8 +21,9 @@ public class SceneChanger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            BlackScreenManager.mySceneNext = nextSceneName; // Geçilecek sahne adını ayarla
+            SceneManager.LoadScene("BlackScreen"); // BlackScreen sahnesine geç
 
-            SceneManager.LoadScene(nextSceneName);
 
         }
     }
