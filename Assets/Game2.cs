@@ -256,7 +256,7 @@ public class Game2 : MonoBehaviour
         Debug.Log("Player Game2 alanına girdi! Game2 başlatılıyor...");
         
         // Game2'yi başlat (eğer henüz başlamamışsa)
-        if (!isGameStarted && !isGameFinished)
+        if (!isGameStarted && !isGameFinished && TaskManager.Instance.IsAllTasksCompleted)
         {
             StartGame2();
         }

@@ -13,8 +13,8 @@ public class BlackScreenManager : MonoBehaviour
     private bool isTyping = false;
 
     // Hangi versiyon kullan�lacak, inspector veya ba�ka script'ten atanabilir
-    public enum DialogVersion { LinesV1, LinesV2 }
-    [SerializeField] private DialogVersion selectedVersion = DialogVersion.LinesV1;
+    public enum DialogVersion {ilkSahne,Dus,EvdenAyrılma,MetroAyrılma,SonSahne }
+    [SerializeField] private DialogVersion selectedVersion = DialogVersion.ilkSahne;
 
     [Header("Diyalog bitti�inde ge�ilecek sahne")]
     [SerializeField] private string nextSceneName;  // Inspector'dan sahne ad� girilecek
@@ -46,10 +46,10 @@ public class BlackScreenManager : MonoBehaviour
             GameTextData data = JsonUtility.FromJson<GameTextData>(jsonFile.text);
             switch (version)
             {
-                case DialogVersion.LinesV1:
+                case DialogVersion.ilkSahne:
                     dialogLines = data.LinesV1?.ToArray();
                     break;
-                case DialogVersion.LinesV2:
+                case DialogVersion.EvdenAyrılma:
                     dialogLines = data.LinesV2?.ToArray();
                     break;
                 default:

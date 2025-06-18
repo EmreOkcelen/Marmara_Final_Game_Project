@@ -25,7 +25,7 @@ public class BlackScreenState : MonoBehaviour
 
     public BlackScreenManager.DialogVersion GetCurrentDialogVersion()
     {
-        return (currentIndex < dialogVersions.Count) ? dialogVersions[currentIndex] : BlackScreenManager.DialogVersion.LinesV1;
+        return (currentIndex < dialogVersions.Count) ? dialogVersions[currentIndex] : BlackScreenManager.DialogVersion.ilkSahne;
     }
 
     public string GetCurrentScene()

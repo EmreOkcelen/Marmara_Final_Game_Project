@@ -38,6 +38,8 @@ public class PlayerController : MonoBehaviour
         playerInputs = new PlayerInputs();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        
+        Debug.Log("PlayerController: Awake completed, CanMove = " + CanMove);
     }
 
     private void OnEnable()
@@ -65,6 +67,8 @@ public class PlayerController : MonoBehaviour
         EventManager.Subscribe("UnlockPlayerMovement", () => rb.isKinematic = false);
         EventManager.Subscribe("UIOpen", () => EventManager.Trigger("LockPlayerMovement"));
         EventManager.Subscribe("UIClose", () => EventManager.Trigger("UnlockPlayerMovement"));
+        
+        Debug.Log("PlayerController: OnEnable completed, input system enabled");
     }
 
     private void OnDisable()
@@ -78,6 +82,14 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        // Debug: T tuşu ile PlayerController durumunu kontrol et
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            DebugPlayerState();
+        }
+        
+        // Sadece hareket edebiliyorsak kamera kontrolü yap
+        if (!CanMove || isUIOpen) return;
 
         // Yatay dönüş
         transform.Rotate(Vector3.up * lookInput.x * Time.deltaTime * ySensitivity);
@@ -88,7 +100,8 @@ public class PlayerController : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (cameraTransform == null) return;
+        if (cameraTransform == null || !CanMove || isUIOpen) return;
+        
         Quaternion q = Quaternion.Euler(targetCameraX, 0f, 0f);
         cameraTransform.localRotation = Quaternion.Slerp(
             cameraTransform.localRotation, q, cameraLerpSpeed * Time.deltaTime);
@@ -96,6 +109,8 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // Hareket edemiyor veya UI açıksa hiçbir şey yapma
+        if (!CanMove || isUIOpen) return;
 
         float speed = sprintInput ? sprintSpeed : walkSpeed;
         if (sprintInput)
@@ -114,16 +129,28 @@ public class PlayerController : MonoBehaviour
         );
 
         // Uygula, dikey hızı koru
-        if (CanMove)
-        {
-            rb.linearVelocity = new Vector3(smoothVel.x, rb.linearVelocity.y, smoothVel.z);
-        }
-        
+        rb.linearVelocity = new Vector3(smoothVel.x, rb.linearVelocity.y, smoothVel.z);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
             isGrounded = true;
+    }
+
+    /// <summary>
+    /// Debug fonksiyonu - PlayerController durumunu kontrol etmek için
+    /// </summary>
+    [System.Diagnostics.Conditional("UNITY_EDITOR")]
+    public void DebugPlayerState()
+    {
+        Debug.Log($"PlayerController Debug:" +
+                  $"\n- CanMove: {CanMove}" +
+                  $"\n- isUIOpen: {isUIOpen}" +
+                  $"\n- moveInput: {moveInput}" +
+                  $"\n- lookInput: {lookInput}" +
+                  $"\n- rb.isKinematic: {rb.isKinematic}" +
+                  $"\n- rb.linearVelocity: {rb.linearVelocity}" +
+                  $"\n- sprintInput: {sprintInput}");
     }
 }

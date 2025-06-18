@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine.UIElements;
 using System;
 using UnityEngine.XR;
+using Unity.VisualScripting;
 
 public class TaskManager : MonoBehaviour
 {
@@ -22,6 +23,8 @@ public class TaskManager : MonoBehaviour
     public static event System.Action<MyTask> OnTaskStarted;
     public static event System.Action<MyTask> OnTaskCompleted;
     public static event System.Action OnAllTasksCompleted;
+
+    public bool IsAllTasksCompleted=false;
 
     [SerializeField] TMP_Text currentTaskText;
 
@@ -41,6 +44,7 @@ public class TaskManager : MonoBehaviour
 
         OnAllTasksCompleted += () =>
         {
+            IsAllTasksCompleted = true;
             Game2 game2 = FindFirstObjectByType<Game2>();
             if (game2 != null)
             {
