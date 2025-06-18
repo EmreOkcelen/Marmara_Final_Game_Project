@@ -4,12 +4,16 @@ using System.Linq;
 using TMPro;
 using UnityEngine.UIElements;
 using System;
+using UnityEngine.XR;
 
 public class TaskManager : MonoBehaviour
 {
     [Header("Task Ayarları")]
     public List<MyTask> allTasks = new List<MyTask>();
     public MyTask currentTask;
+
+    private InputDevice leftController;
+    private InputDevice rightController;
 
     [Header("Debug")]
     public bool showDebugInfo = true;
@@ -50,6 +54,47 @@ public class TaskManager : MonoBehaviour
             // Burada tüm görevler tamamlandığında yapılacak işlemler
             }
             ;
+            InputDevices.deviceConnected += OnDeviceConnected;
+            InitializeOpenXRControllers();
+    }
+
+    private void OnDestroy()
+    {
+        InputDevices.deviceConnected -= OnDeviceConnected;
+    }
+
+    private void OnDeviceConnected(InputDevice device)
+    {
+        if ((device.characteristics & InputDeviceCharacteristics.Left) != 0 &&
+            (device.characteristics & InputDeviceCharacteristics.Controller) != 0)
+        {
+            leftController = device;
+        }
+        if ((device.characteristics & InputDeviceCharacteristics.Right) != 0 &&
+            (device.characteristics & InputDeviceCharacteristics.Controller) != 0)
+        {
+            rightController = device;
+        }
+    }
+
+    private void InitializeOpenXRControllers()
+    {
+        var allDevices = new List<InputDevice>();
+        InputDevices.GetDevices(allDevices);
+
+        foreach (var d in allDevices)
+        {
+            if ((d.characteristics & InputDeviceCharacteristics.Left) != 0 &&
+                (d.characteristics & InputDeviceCharacteristics.Controller) != 0)
+            {
+                leftController = d;
+            }
+            if ((d.characteristics & InputDeviceCharacteristics.Right) != 0 &&
+                (d.characteristics & InputDeviceCharacteristics.Controller) != 0)
+            {
+                rightController = d;
+            }
+        }
     }
 
     private void Start()
@@ -82,7 +127,8 @@ public class TaskManager : MonoBehaviour
         {
             CompleteCurrentTask();
         }
-        
+
+
         currentTaskText.text = currentTask.name + " ile etkileşimde bulun" + "(" + GetCompletedTaskCount() + "/" + (GetTotalTaskCount())  + ")";
     }
     // Tüm görevleri tamamla (debug amaçlı)

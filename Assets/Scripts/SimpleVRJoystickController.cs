@@ -118,24 +118,24 @@ public class SimpleVRJoystickController : MonoBehaviour
     private void ReadVRInput()
     {
         // Read joystick inputs
-        leftController.TryGetFeatureValue(CommonUsages.primary2DAxis, out leftThumbstick);
-        rightController.TryGetFeatureValue(CommonUsages.primary2DAxis, out rightThumbstick);
+        leftController.TryGetFeatureValue(UnityEngine.XR.CommonUsages.primary2DAxis, out leftThumbstick);
+        rightController.TryGetFeatureValue(UnityEngine.XR.CommonUsages.primary2DAxis, out rightThumbstick);
         
         // Read trigger inputs
-        leftController.TryGetFeatureValue(CommonUsages.trigger, out float leftTriggerValue);
-        rightController.TryGetFeatureValue(CommonUsages.trigger, out float rightTriggerValue);
+        leftController.TryGetFeatureValue(UnityEngine.XR.CommonUsages.trigger, out float leftTriggerValue);
+        rightController.TryGetFeatureValue(UnityEngine.XR.CommonUsages.trigger, out float rightTriggerValue);
         leftTrigger = leftTriggerValue > 0.7f;
         rightTrigger = rightTriggerValue > 0.7f;
         
         // Read grip inputs
-        leftController.TryGetFeatureValue(CommonUsages.grip, out float leftGripValue);
-        rightController.TryGetFeatureValue(CommonUsages.grip, out float rightGripValue);
+        leftController.TryGetFeatureValue(UnityEngine.XR.CommonUsages.grip, out float leftGripValue);
+        rightController.TryGetFeatureValue(UnityEngine.XR.CommonUsages.grip, out float rightGripValue);
         leftGrip = leftGripValue > 0.7f;
         rightGrip = rightGripValue > 0.7f;
         
         // Read button inputs
-        leftController.TryGetFeatureValue(CommonUsages.primaryButton, out leftPrimaryButton);
-        rightController.TryGetFeatureValue(CommonUsages.primaryButton, out rightPrimaryButton);
+        leftController.TryGetFeatureValue(UnityEngine.XR.CommonUsages.primaryButton, out leftPrimaryButton);
+        rightController.TryGetFeatureValue(UnityEngine.XR.CommonUsages.primaryButton, out rightPrimaryButton);
     }
     
     private void HandleMovement()

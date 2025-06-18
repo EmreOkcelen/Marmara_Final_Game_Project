@@ -103,12 +103,12 @@ public class VRController : MonoBehaviour
     private void HandleVRInput()
     {
         // Get joystick inputs
-        leftHandDevice.TryGetFeatureValue(CommonUsages.primary2DAxis, out leftJoystickInput);
-        rightHandDevice.TryGetFeatureValue(CommonUsages.primary2DAxis, out rightJoystickInput);
+        leftHandDevice.TryGetFeatureValue(UnityEngine.XR.CommonUsages.primary2DAxis, out leftJoystickInput);
+        rightHandDevice.TryGetFeatureValue(UnityEngine.XR.CommonUsages.primary2DAxis, out rightJoystickInput);
         
         // Get button inputs for sprint
-        leftHandDevice.TryGetFeatureValue(CommonUsages.primaryButton, out bool leftPrimaryButton);
-        rightHandDevice.TryGetFeatureValue(CommonUsages.primaryButton, out bool rightPrimaryButton);
+        leftHandDevice.TryGetFeatureValue(UnityEngine.XR.CommonUsages.primaryButton, out bool leftPrimaryButton);
+        rightHandDevice.TryGetFeatureValue(UnityEngine.XR.CommonUsages.primaryButton, out bool rightPrimaryButton);
         
         isSprinting = leftPrimaryButton || rightPrimaryButton;
         
@@ -228,7 +228,7 @@ public class VRController : MonoBehaviour
     {
         InputDevice device = (hand == XRNode.LeftHand) ? leftHandDevice : rightHandDevice;
         float value;
-        device.TryGetFeatureValue(CommonUsages.trigger, out value);
+        device.TryGetFeatureValue(UnityEngine.XR.CommonUsages.trigger, out value);
         return value;
     }
     
@@ -236,7 +236,7 @@ public class VRController : MonoBehaviour
     {
         InputDevice device = (hand == XRNode.LeftHand) ? leftHandDevice : rightHandDevice;
         float value;
-        device.TryGetFeatureValue(CommonUsages.grip, out value);
+        device.TryGetFeatureValue(UnityEngine.XR.CommonUsages.grip, out value);
         return value;
     }
     
@@ -248,17 +248,17 @@ public class VRController : MonoBehaviour
         {
             case "primary":
                 bool primary;
-                device.TryGetFeatureValue(CommonUsages.primaryButton, out primary);
+                device.TryGetFeatureValue(UnityEngine.XR.CommonUsages.primaryButton, out primary);
                 return primary;
                 
             case "secondary":
                 bool secondary;
-                device.TryGetFeatureValue(CommonUsages.secondaryButton, out secondary);
+                device.TryGetFeatureValue(UnityEngine.XR.CommonUsages.secondaryButton, out secondary);
                 return secondary;
                 
             case "menu":
                 bool menu;
-                device.TryGetFeatureValue(CommonUsages.menuButton, out menu);
+                device.TryGetFeatureValue(UnityEngine.XR.CommonUsages.menuButton, out menu);
                 return menu;
                 
             default:

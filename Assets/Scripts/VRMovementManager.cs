@@ -87,13 +87,13 @@ public class VRMovementManager : MonoBehaviour
     private void ReadInput()
     {
         // Joystick değerlerini oku
-        leftController.TryGetFeatureValue(CommonUsages.primary2DAxis, out leftJoystick);
-        rightController.TryGetFeatureValue(CommonUsages.primary2DAxis, out rightJoystick);
+        leftController.TryGetFeatureValue(UnityEngine.XR.CommonUsages.primary2DAxis, out leftJoystick);
+        rightController.TryGetFeatureValue(UnityEngine.XR.CommonUsages.primary2DAxis, out rightJoystick);
         
         // Koşma kontrolü (grip tuşları)
         float leftGrip, rightGrip;
-        leftController.TryGetFeatureValue(CommonUsages.grip, out leftGrip);
-        rightController.TryGetFeatureValue(CommonUsages.grip, out rightGrip);
+        leftController.TryGetFeatureValue(UnityEngine.XR.CommonUsages.grip, out leftGrip);
+        rightController.TryGetFeatureValue(UnityEngine.XR.CommonUsages.grip, out rightGrip);
         isRunning = leftGrip > 0.7f || rightGrip > 0.7f;
     }
     
@@ -182,27 +182,27 @@ public class VRMovementManager : MonoBehaviour
         {
             case "trigger":
                 float trigger;
-                device.TryGetFeatureValue(CommonUsages.trigger, out trigger);
+                device.TryGetFeatureValue(UnityEngine.XR.CommonUsages.trigger, out trigger);
                 return trigger > 0.7f;
                 
             case "grip":
                 float grip;
-                device.TryGetFeatureValue(CommonUsages.grip, out grip);
+                device.TryGetFeatureValue(UnityEngine.XR.CommonUsages.grip, out grip);
                 return grip > 0.7f;
                 
             case "primary":
                 bool primary;
-                device.TryGetFeatureValue(CommonUsages.primaryButton, out primary);
+                device.TryGetFeatureValue(UnityEngine.XR.CommonUsages.primaryButton, out primary);
                 return primary;
                 
             case "secondary":
                 bool secondary;
-                device.TryGetFeatureValue(CommonUsages.secondaryButton, out secondary);
+                device.TryGetFeatureValue(UnityEngine.XR.CommonUsages.secondaryButton, out secondary);
                 return secondary;
                 
             case "menu":
                 bool menu;
-                device.TryGetFeatureValue(CommonUsages.menuButton, out menu);
+                device.TryGetFeatureValue(UnityEngine.XR.CommonUsages.menuButton, out menu);
                 return menu;
                 
             default:

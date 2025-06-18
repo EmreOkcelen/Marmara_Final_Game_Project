@@ -1,7 +1,9 @@
 using UnityEngine;
 using TMPro;
 using System.Linq;
-
+using UnityEngine.XR;
+using System.Collections.Generic;
+using UnityEngine.Events;
 public class InteractableUIController : MonoBehaviour
 {
     [Header("Settings")]
@@ -9,11 +11,60 @@ public class InteractableUIController : MonoBehaviour
     public Vector3 boxSize = Vector3.one * 5f;
     public Vector3 promptOffset = Vector3.up * 2f;
     public GameObject promptObject;
-
+    private InputDevice leftController;
+    private InputDevice rightController;
     private TextMeshPro prompt3DText;
     private bool isInRange;
     private bool isPanelOpen;
+    
+    // Button press tracking
+    private bool leftSecondaryButtonPreviousState;
+    private bool rightSecondaryButtonPreviousState;
+    void Awake()
+    {
+        InputDevices.deviceConnected += OnDeviceConnected;
+        InitializeOpenXRControllers();
+    }
 
+    void OnDestroy()
+    {
+        InputDevices.deviceConnected -= OnDeviceConnected;
+    }
+
+    void OnDeviceConnected(InputDevice device)
+    {
+        if ((device.characteristics & InputDeviceCharacteristics.Left) != 0 &&
+            (device.characteristics & InputDeviceCharacteristics.Controller) != 0)
+        {
+            leftController = device;
+        }
+        if ((device.characteristics & InputDeviceCharacteristics.Right) != 0 &&
+            (device.characteristics & InputDeviceCharacteristics.Controller) != 0)
+        {
+            rightController = device;
+        }
+        
+    }   
+
+    void InitializeOpenXRControllers()
+    {
+        var allDevices = new List<InputDevice>();
+        InputDevices.GetDevices(allDevices);    
+
+        foreach (var d in allDevices)
+        {
+            if ((d.characteristics & InputDeviceCharacteristics.Left) != 0 &&
+                (d.characteristics & InputDeviceCharacteristics.Controller) != 0)
+            {
+                leftController = d;
+            }
+            if ((d.characteristics & InputDeviceCharacteristics.Right) != 0 &&
+                (d.characteristics & InputDeviceCharacteristics.Controller) != 0)
+            {
+                rightController = d;
+            }
+        }   
+    }
 
     void Start()
     {
@@ -84,6 +135,28 @@ public class InteractableUIController : MonoBehaviour
         {
             if (isPanelOpen) ClosePanel();
             else OpenPanel();
+        }
+        
+        // Sol kontrolcü button down detection
+        if(leftController.TryGetFeatureValue(CommonUsages.secondaryButton, out bool leftSecondaryButton))
+        {
+            if(leftSecondaryButton && !leftSecondaryButtonPreviousState)
+            {
+                if(isPanelOpen) ClosePanel();
+                else OpenPanel();
+            }
+            leftSecondaryButtonPreviousState = leftSecondaryButton;
+        }
+        
+        // Sağ kontrolcü button down detection
+        if(rightController.TryGetFeatureValue(CommonUsages.secondaryButton, out bool rightSecondaryButton))
+        {
+            if(rightSecondaryButton && !rightSecondaryButtonPreviousState)
+            {
+                if(isPanelOpen) ClosePanel();
+                else OpenPanel();
+            }
+            rightSecondaryButtonPreviousState = rightSecondaryButton;
         }
     }
 
