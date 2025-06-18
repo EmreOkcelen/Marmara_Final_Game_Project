@@ -4,8 +4,11 @@ using System.Collections.Generic;
 public class GameTextData
 {
     public List<string> facts;
-    public List<string> LinesV1;
-    public List<string> LinesV2;
+    public List<string> ilkSahne;
+    public List<string> Dus;
+    public List<string> EvdenAyrýlma;
+    public List<string> MetroAyrýlma;
+    public List<string> SonSahne;
 }
 
 

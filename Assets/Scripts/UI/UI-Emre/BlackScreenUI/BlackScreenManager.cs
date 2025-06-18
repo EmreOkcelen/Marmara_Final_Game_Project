@@ -47,10 +47,10 @@ public class BlackScreenManager : MonoBehaviour
             switch (version)
             {
                 case DialogVersion.ilkSahne:
-                    dialogLines = data.LinesV1?.ToArray();
+                    dialogLines = data.ilkSahne?.ToArray();
                     break;
                 case DialogVersion.EvdenAyrılma:
-                    dialogLines = data.LinesV2?.ToArray();
+                    dialogLines = data.EvdenAyrılma?.ToArray();
                     break;
                 default:
                     dialogLines = new string[] { "Diyalog versiyonu se�ilmedi." };
