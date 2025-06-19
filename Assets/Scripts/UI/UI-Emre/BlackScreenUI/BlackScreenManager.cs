@@ -19,7 +19,7 @@ public class BlackScreenManager : MonoBehaviour
 
     // Hangi versiyon kullan�lacak, inspector veya ba�ka script'ten atanabilir
     public enum DialogVersion {ilkSahne,Dus,EvdenAyrilma,MetroAyrilma,SonSahne }
-    [SerializeField] private DialogVersion selectedVersion = DialogVersion.ilkSahne;
+    public DialogVersion selectedVersion ;
 
     [Header("Diyalog bitti�inde ge�ilecek sahne")]
     public static string nextSceneName;
