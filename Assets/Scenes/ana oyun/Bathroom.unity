@@ -9733,7 +9733,7 @@ MonoBehaviour:
   completionPercentage: 0
   isActive: 0
   taskLocation: 0
-  taskText: {fileID: 0}
+  taskText: {fileID: 1861163109}
   onCompleted:
     m_PersistentCalls:
       m_Calls: []
@@ -9752,8 +9752,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62d4cf1f49b81fb44bf4db4fc7b39683, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionText: "yard\u0131m eeeet"
-  boxSize: {x: 2, y: 3, z: 1}
+  interactionText: "Du\u015F al."
+  boxSize: {x: 2, y: 3, z: 2.59}
   promptOffset: {x: 1.5, y: 2, z: 0}
   promptObject: {fileID: 1121107281}
 --- !u!1 &1488055737
@@ -9790,7 +9790,7 @@ MonoBehaviour:
   pauseMenu: {fileID: 0}
   inGameUI: {fileID: 1861163108}
   talkingWithMyselfPanel: {fileID: 1861163107}
-  gorevText: {fileID: 0}
+  gorevText: {fileID: 1861163109}
   gameplayScenes: []
 --- !u!4 &1488055739
 Transform:
@@ -28115,9 +28115,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ea4813bf32004aa196048a5ebd81e91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allTasks: []
+  allTasks:
+  - {fileID: 1466091764}
   currentTask: {fileID: 1466091764}
-  showDebugInfo: 1
+  showDebugInfo: 0
   IsAllTasksCompleted: 0
   currentTaskText: {fileID: 1861163109}
 --- !u!4 &1893359782
@@ -28714,6 +28715,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: b83e60fe27ef9724ba3faf1088089176, type: 3}
       propertyPath: m_Name
       value: IDLE SAD MAN
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b83e60fe27ef9724ba3faf1088089176, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: b83e60fe27ef9724ba3faf1088089176, type: 3}
       propertyPath: m_Controller

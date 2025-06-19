@@ -39,6 +39,7 @@ public class Game2 : MonoBehaviour
     public bool isPlayerInGreenArea = false; // Oyuncu yeşil alanda mı?
 
     public static Game2 Instance { get; private set; } // Singleton örneği
+    public GameObject game1;
     private void Awake()
     {
         // Singleton kontrolü
@@ -243,7 +244,7 @@ public class Game2 : MonoBehaviour
         currentAreaSize = initialAreaSize;
         isPlayerInGreenArea = false;
         objectToMove.GetComponent<Rigidbody>().isKinematic = false; // Fizik etkilerini geri al
-        Game1.Instance.StartGame1(); // Game1'i yeniden başlat
+        game1.GetComponent<Game1>().StartGame1(); // Game1'i bitir
         
         Debug.Log("Game2 tamamen bitirildi! Yeniden başlatmak için StartGame2() çağrılmalı.");
     }

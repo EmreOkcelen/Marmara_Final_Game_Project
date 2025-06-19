@@ -24,7 +24,7 @@ public class TaskManager : MonoBehaviour
     public static event System.Action<MyTask> OnTaskCompleted;
     public static event System.Action OnAllTasksCompleted;
 
-    public bool IsAllTasksCompleted=false;
+    public bool IsAllTasksCompleted = false;
 
     [SerializeField] TMP_Text currentTaskText;
 
@@ -34,8 +34,7 @@ public class TaskManager : MonoBehaviour
     {
         if (Instance == null)
         {
-            Instance = this;
-            DontDestroyOnLoad(gameObject); // TaskManager'i sahneler arasında taşınabilir yapmak için
+            Instance = this;// TaskManager'i sahneler arasında taşınabilir yapmak için
         }
         else
         {
@@ -56,10 +55,10 @@ public class TaskManager : MonoBehaviour
                 Debug.LogWarning("game2 script bulunamadı, görev tamamlandığında yapılacak işlemler atlanıyor.");
             }
             // Burada tüm görevler tamamlandığında yapılacak işlemler
-            }
+        }
             ;
-            InputDevices.deviceConnected += OnDeviceConnected;
-            InitializeOpenXRControllers();
+        InputDevices.deviceConnected += OnDeviceConnected;
+        InitializeOpenXRControllers();
     }
 
     private void OnDestroy()
@@ -127,19 +126,30 @@ public class TaskManager : MonoBehaviour
         {
             Debug.Log("mevcut görev:" + (currentTask ? currentTask.name : "Yok"));
         }
-        if(Input.GetKeyDown(KeyCode.R))
+
+
+        if (GetCompletedTaskCount() == (GetTotalTaskCount()-1))
         {
-            CompleteCurrentTask();
+            IsAllTasksCompleted = true;
+            Debug.Log("Tüm görevler tamamlandı!");
+            OnAllTasksCompleted?.Invoke();
         }
+        else
+        {
+              currentTaskText.text = currentTask.name + " ile etkileşimde bulun" + "(" + GetCompletedTaskCount() + "/" + (GetTotalTaskCount() - 1) + ")";
+   
+            if (Input.GetKeyDown(KeyCode.R))
+            {
 
-
-        currentTaskText.text = currentTask.name + " ile etkileşimde bulun" + "(" + GetCompletedTaskCount() + "/" + (GetTotalTaskCount())  + ")";
-    }
+                CompleteCurrentTask();
+            }
+        }
+       }
     // Tüm görevleri tamamla (debug amaçlı)
     public void CompleteAllTasks()
     {
         Debug.Log("Tüm görevler manuel olarak tamamlanıyor...");
-        
+
         foreach (MyTask task in allTasks)
         {
             if (!task.IsCompleted)
@@ -149,7 +159,7 @@ public class TaskManager : MonoBehaviour
                 Debug.Log($"Görev tamamlandı: {task.name}");
             }
         }
-        
+
         currentTask = null;
         Debug.Log("Tüm görevler tamamlandı!");
         OnAllTasksCompleted?.Invoke();
@@ -185,7 +195,7 @@ public class TaskManager : MonoBehaviour
 
         // Tamamlanmamış ilk görevi bul
         currentTask = allTasks.FirstOrDefault(t => !t.IsCompleted);
-        
+
 
         if (currentTask != null)
         {

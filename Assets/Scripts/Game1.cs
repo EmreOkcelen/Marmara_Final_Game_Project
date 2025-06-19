@@ -20,7 +20,7 @@ public class Game1 : MonoBehaviour
     private Quaternion originalRot;
     private bool isShaking;
     private AudioSource audioSource;
-    public static Game1 Instance;
+
 
     void Start()
     {
@@ -29,25 +29,29 @@ public class Game1 : MonoBehaviour
 
         // AudioSource component'ini ekle ve 3D ses için ayarla
         audioSource = Phone.GetComponent<AudioSource>();
-        if (audioSource == null)
-        {
-            audioSource = Phone.AddComponent<AudioSource>();
-        }
+
 
         audioSource.clip = ringTone;
         audioSource.spatialBlend = 1.0f; // 3D ses için
         audioSource.loop = true; // Sesi sürekli tekrarla
         audioSource.playOnAwake = false;
         audioSource.volume = 1.0f; // Ses seviyesi
-        audioSource.enabled = false; // Başlangıçta devre dışı bırak
     }
 
     void Update()
     {
-        
-        // Game başlatılmadıysa hiçbir şey yapma
-        if (!isGameStarted) return;
-        
+        // Game1 başlatıldıysa ve player telefonun etrafında ise
+        if (isGameStarted)
+        {
+            PhoneRingAnimation(); // Telefonu çaldır
+        }
+
+        // Game1 bitmemişse ve player telefonun etrafında değilse
+        if (isGameStarted && isGameFinished == false && !isShaking)
+        {
+            // Telefonu sallamayı durdur
+            StopPhoneRing();
+        }        
         
     }
 

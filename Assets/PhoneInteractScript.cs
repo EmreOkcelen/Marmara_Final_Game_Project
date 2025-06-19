@@ -14,6 +14,8 @@ public class PhoneInteractScript : MonoBehaviour
     private bool isInRange;
     private bool isPanelOpen;
 
+    public GameObject game1;
+
 
     void Start()
     {
@@ -82,7 +84,7 @@ public class PhoneInteractScript : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            Game1.Instance.FinishGame1();
+            game1.GetComponent<Game1>().FinishGame1();
             
         }
     }
