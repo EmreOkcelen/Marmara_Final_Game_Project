@@ -12,7 +12,8 @@ public class LocalChatLLM : MonoBehaviour
    // public TextMeshProUGUI npcReactionText;
 
     private const string OpenRouterApiKey = "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";
-    private const string OpenRouterApiUrl = "https://openrouter.ai/api/v1/chat/completions";
+    private const string OpenAIApiKey = "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"; // Buraya yeni API key
+    private const string OpenAIApiUrl = "https://api.openai.com/v1/chat/completions";
 
     public static LocalChatLLM Instance;
 
@@ -71,22 +72,23 @@ public class LocalChatLLM : MonoBehaviour
         string userPrompt = "Bir alkol bağımlısı sana çarptı. Ona 1-2 cümle ile iğrenç, sert ve sinirli şekilde kırıcı bir cevap ver.";
 
         string json = @"{
-        ""model"": ""openai/gpt-3.5-turbo"",
+        ""model"": ""gpt-3.5-turbo"",
         ""messages"": [
-            {""role"": ""system"", ""content"": """ + systemPrompt + @"""}, 
-            {""role"": ""user"", ""content"": """ + userPrompt + @"""}
-        ],
-        ""max_tokens"": 125,
-        ""temperature"": 0.8
-    }";
+        {""role"": ""system"", ""content"": """ + systemPrompt + @"""}, 
+        {""role"": ""user"", ""content"": """ + userPrompt + @"""}
+    ],
+    ""max_tokens"": 125,
+    ""temperature"": 0.8
+}";
 
-        using (UnityWebRequest www = new UnityWebRequest(OpenRouterApiUrl, "POST"))
+
+        using (UnityWebRequest www = new UnityWebRequest(OpenAIApiUrl, "POST"))
         {
             byte[] bodyRaw = Encoding.UTF8.GetBytes(json);
             www.uploadHandler = new UploadHandlerRaw(bodyRaw);
             www.downloadHandler = new DownloadHandlerBuffer();
             www.SetRequestHeader("Content-Type", "application/json");
-            www.SetRequestHeader("Authorization", "Bearer " + OpenRouterApiKey);
+            www.SetRequestHeader("Authorization", "Bearer " + OpenAIApiKey);
 
             yield return www.SendWebRequest();
 
