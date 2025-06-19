@@ -12,7 +12,7 @@ public class LocalChatLLM : MonoBehaviour
    // public TextMeshProUGUI npcReactionText;
 
     private const string OpenRouterApiKey = "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";
-    private const string OpenAIApiKey = "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"; // Buraya yeni API key
+    private const string OpenAIApiKey = "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"; // Buraya yeni API key
     private const string OpenAIApiUrl = "https://api.openai.com/v1/chat/completions";
 
     public static LocalChatLLM Instance;
