@@ -42,4 +42,10 @@ public class BlackScreenState : MonoBehaviour
     {
         currentIndex = 0;
     }
+    public void SetState(BlackScreenManager.DialogVersion version, string sceneName)
+    {
+        dialogVersions.Add(version);
+        sceneNames.Add(sceneName);
+    }
+
 }

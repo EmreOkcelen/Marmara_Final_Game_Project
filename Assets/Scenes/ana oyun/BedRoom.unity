@@ -12394,6 +12394,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 650110128840471807, guid: 751c57d139dab412f937c3dc2a71ac26, type: 3}
+      propertyPath: dialogVersion
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 650110128840471807, guid: 751c57d139dab412f937c3dc2a71ac26, type: 3}
       propertyPath: nextSceneName
       value: Home
       objectReference: {fileID: 0}

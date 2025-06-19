@@ -18,7 +18,7 @@ public class BlackScreenManager : MonoBehaviour
     private bool isTyping = false;
 
     // Hangi versiyon kullan�lacak, inspector veya ba�ka script'ten atanabilir
-    public enum DialogVersion {ilkSahne,Dus,EvdenAyrilma,MetroAyrilma,SonSahne }
+    public enum DialogVersion {ilkSahne,Dus, EvdenAyrılma, Metroayrilma, SonSahne, None }
     public DialogVersion selectedVersion ;
 
     [Header("Diyalog bitti�inde ge�ilecek sahne")]
@@ -90,22 +90,36 @@ public class BlackScreenManager : MonoBehaviour
                 case DialogVersion.ilkSahne:
                     dialogLines = data.ilkSahne?.ToArray();
                     break;
-                case DialogVersion.EvdenAyrilma:
-                    dialogLines = data.EvdenAyrilma?.ToArray();
+
+                case DialogVersion.Dus:
+                    dialogLines = data.Dus?.ToArray();
                     break;
+
+                case DialogVersion.EvdenAyrılma:
+                    dialogLines = data.EvdenAyrılma?.ToArray();
+                    break;
+
+                case DialogVersion.Metroayrilma:
+                    dialogLines = data.Metroayrilma?.ToArray();
+                    break;
+
+                case DialogVersion.SonSahne:
+                    dialogLines = data.SonSahne?.ToArray();
+                    break;
+
                 default:
-                    dialogLines = new string[] { "Diyalog versiyonu se�ilmedi." };
+                    dialogLines = new string[] { "Diyalog versiyonu seçilmedi." };
                     break;
             }
-            Debug.Log("Dialog sat�rlar� y�klendi: " + dialogLines.Length);
+
+            Debug.Log("Diyalog satırları yüklendi: " + dialogLines.Length);
         }
         else
         {
-            Debug.LogError("dialog.json bulunamad�!");
-            dialogLines = new string[] { "Diyalog dosyas� y�klenemedi." };
+            Debug.LogError("addictionFacts.json bulunamadı!");
+            dialogLines = new string[] { "Diyalog dosyası yüklenemedi." };
         }
     }
-
 
     private void Update()
     {
